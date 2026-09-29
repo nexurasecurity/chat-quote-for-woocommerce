@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="Chat Quote for WooCommerce">
+	<description>WordPress Core coding standards for plugin PHP files.</description>
+
+	<file>.</file>
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<exclude-pattern>assets/*</exclude-pattern>
+	<exclude-pattern>languages/*</exclude-pattern>
+
+	<arg name="basepath" value="."/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<rule ref="WordPress-Core"/>
+</ruleset>

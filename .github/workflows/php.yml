@@ -1,0 +1,58 @@
+name: PHP checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  php-lint:
+    name: PHP ${{ matrix.php-version }} syntax
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['7.4', '8.3']
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Lint PHP files
+        run: find . -type d \( -name .git -o -name vendor \) -prune -o -type f -name '*.php' -print0 | xargs -0 -r -n1 php -l
+
+  wordpress-coding-standards:
+    name: WordPress Coding Standards (advisory)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer
+
+      - name: Install WordPress Coding Standards
+        run: |
+          composer global require --no-plugins --no-interaction --prefer-dist wp-coding-standards/wpcs:^3.4.1
+          composer_bin="$(composer global config bin-dir --absolute)"
+          echo "$composer_bin" >> "$GITHUB_PATH"
+          composer_home="$(composer global config home)"
+          "$composer_bin/phpcs" --config-set installed_paths "$composer_home/vendor/wp-coding-standards/wpcs,$composer_home/vendor/phpcsstandards/phpcsutils,$composer_home/vendor/phpcsstandards/phpcsextra"
+
+      - name: Check coding standards
+        run: phpcs --standard=phpcs.xml.dist
