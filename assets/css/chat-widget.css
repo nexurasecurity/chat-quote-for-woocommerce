@@ -1,0 +1,2260 @@
+/* ==========================================================================
+   Chat Quote for WooCommerce — Premium Frontend Widget
+   WhatsApp Business-style design system
+   ========================================================================== */
+
+/* ---------- Design Tokens ---------- */
+:root {
+	--cq-teal: #027B23;
+	--cq-teal-light: #027B23;
+	--cq-green: #00D054;
+	--cq-green-hover: #00D054;
+	--cq-bg-chat: #efeae2;
+	--cq-bg-chat-pattern: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='p' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23d4cfc6' opacity='.35'/%3E%3Ccircle cx='22' cy='22' r='1' fill='%23d4cfc6' opacity='.25'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='200' height='200' fill='url(%23p)'/%3E%3C/svg%3E");
+	--cq-bubble-out: #dcf8c6;
+	--cq-bubble-in: #ffffff;
+	--cq-text: #111b21;
+	--cq-text-secondary: #667781;
+	--cq-border: #e9edef;
+	--cq-surface: #f0f2f5;
+	--cq-gold: linear-gradient(135deg, #f59e0b, #d97706);
+	--cq-radius-bubble: 7.5px;
+	--cq-radius-card: 16px;
+	--cq-radius-input: 24px;
+	--cq-radius-pill: 999px;
+	--cq-shadow-panel: 0 12px 28px 0 rgba(0, 0, 0, .2), 0 2px 4px 0 rgba(0, 0, 0, .1);
+	--cq-shadow-button: 0 4px 14px rgba(37, 211, 102, .4);
+	--cq-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--cq-transition: cubic-bezier(.4, 0, .2, 1);
+}
+
+/* ---------- Widget Root ---------- */
+#cqfw-widget-root {
+	position: fixed;
+	right: 24px;
+	bottom: 24px;
+	z-index: 99999;
+	font-family: var(--cq-font);
+	font-size: 14px;
+	color: var(--cq-text);
+	line-height: 1.4;
+}
+/* ---------- Strong Reset to Prevent Theme Conflicts ---------- */
+:where(#cqfw-widget-root),
+:where(#cqfw-widget-root) *,
+:where(#cqfw-widget-root) *::before,
+:where(#cqfw-widget-root) *::after {
+	box-sizing: border-box !important;
+}
+
+:where(#cqfw-widget-root) div,
+:where(#cqfw-widget-root) span,
+:where(#cqfw-widget-root) p,
+:where(#cqfw-widget-root) a,
+:where(#cqfw-widget-root) button,
+:where(#cqfw-widget-root) input,
+:where(#cqfw-widget-root) textarea,
+:where(#cqfw-widget-root) form,
+:where(#cqfw-widget-root) ul,
+:where(#cqfw-widget-root) li {
+	margin: 0;
+	padding: 0;
+	border: none;
+	background: none;
+	line-height: normal;
+	font-family: var(--cq-font);
+	color: inherit;
+	box-shadow: none;
+	border-radius: 0;
+	text-decoration: none;
+	list-style: none;
+	outline: none;
+}
+
+:where(#cqfw-widget-root) img,
+:where(#cqfw-widget-root) svg {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+/* ---------- Floating Button ---------- */
+#cqfw-widget-root .cqfw-floating-button {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: var(--cq-button-custom-bg, var(--cq-green));
+	color: var(--cq-button-custom-text, #fff);
+	box-shadow: var(--cq-shadow-button);
+	cursor: pointer;
+	transition: all .25s var(--cq-transition);
+	outline: none;
+}
+
+#cqfw-widget-root .cqfw-floating-button--icon-only {
+	width: 60px;
+	height: 60px;
+	padding: 0;
+}
+
+#cqfw-widget-root .cqfw-floating-button:hover,
+#cqfw-widget-root .cqfw-floating-button:focus-visible {
+	background: var(--cq-green-hover) !important;
+	transform: scale(1.06);
+	box-shadow: 0 6px 20px rgba(37, 211, 102, .5) !important;
+}
+
+/* Pulse ring animation */
+#cqfw-widget-root .cqfw-floating-button::before {
+	content: '';
+	position: absolute;
+	inset: -6px;
+	border-radius: inherit;
+	border: 2px solid var(--cq-green);
+	opacity: 0;
+	animation: cq-pulse-ring 2.5s ease-out infinite;
+	pointer-events: none;
+}
+
+@keyframes cq-pulse-ring {
+	0% {
+		transform: scale(.95);
+		opacity: .6;
+	}
+
+	70% {
+		transform: scale(1.15);
+		opacity: 0;
+	}
+
+	100% {
+		transform: scale(1.15);
+		opacity: 0;
+	}
+}
+
+/* Hide ring when chat is open */
+#cqfw-widget-root .cqfw-floating-button[aria-expanded="true"]::before {
+	animation: none;
+	opacity: 0;
+}
+
+#cqfw-widget-root .cqfw-wa-svg-icon {
+	width: 38px !important;
+	height: 38px !important;
+	flex-shrink: 0;
+	fill: currentColor !important;
+}
+
+#cqfw-widget-root .cqfw-floating-label {
+	font-weight: 500;
+	font-size: 15px;
+	white-space: nowrap;
+}
+
+/* ---------- Chat Panel (Floating with Standard Screen Margin) ---------- */
+#cqfw-widget-root .cqfw-chat-panel {
+	position: fixed !important;
+	right: 20px !important;
+	bottom: 20px !important;
+	top: auto !important;
+	left: auto !important;
+	width: 380px;
+	max-width: calc(100vw - 32px);
+	max-height: min(84vh, 620px) !important;
+	display: flex;
+	flex-direction: column;
+	border-radius: 18px !important;
+	background: var(--cq-bg-chat);
+	background-image: var(--cq-bg-chat-pattern);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22), 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+	overflow: hidden;
+	opacity: 0;
+	transform: scale(0.78) translate(12px, 18px);
+	transform-origin: bottom right;
+	pointer-events: none;
+	transition: opacity .28s ease, transform .38s cubic-bezier(0.19, 1, 0.22, 1);
+	z-index: 9999999 !important;
+}
+
+#cqfw-widget-root .cqfw-chat-panel[aria-hidden="false"] {
+	opacity: 1;
+	transform: scale(1) translate(0, 0);
+	pointer-events: auto;
+}
+
+#cqfw-widget-root.cqfw-pos-left .cqfw-chat-panel {
+	right: auto !important;
+	left: 20px !important;
+	transform-origin: bottom left;
+	transform: scale(0.78) translate(-12px, 18px);
+}
+
+#cqfw-widget-root.cqfw-pos-left .cqfw-chat-panel[aria-hidden="false"] {
+	transform: scale(1) translate(0, 0);
+}
+
+/* Ensure floating button and all pulse rings/badges are 100% hidden when chat is open */
+#cqfw-widget-root.is-open .cqfw-floating-button,
+#cqfw-widget-root.is-open .cqfw-floating-button[class*="cqfw-launcher--"],
+#cqfw-widget-root.is-open .cqfw-floating-button::before,
+#cqfw-widget-root.is-open .cqfw-floating-button::after {
+	display: none !important;
+	opacity: 0 !important;
+	visibility: hidden !important;
+	pointer-events: none !important;
+}
+
+/* ---------- Header ---------- */
+#cqfw-widget-root .cqfw-chat-panel__header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 8px;
+	padding: 10px 14px;
+	background: var(--cq-teal) !important;
+	color: #fff !important;
+	position: relative;
+	z-index: 2;
+	flex-shrink: 0;
+}
+
+#cqfw-widget-root .cqfw-back-to-agents {
+	background: transparent !important;
+	border: none !important;
+	color: #ffffff !important;
+	cursor: pointer;
+	padding: 4px 6px 4px 0 !important;
+	margin: 0 !important;
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.9;
+	transition: opacity 0.2s, transform 0.2s;
+	outline: none;
+	flex-shrink: 0;
+}
+
+#cqfw-widget-root .cqfw-back-to-agents:hover {
+	opacity: 1;
+	transform: translateX(-2px);
+}
+
+#cqfw-widget-root .cqfw-header-brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+	flex: 1 1 auto;
+}
+
+#cqfw-widget-root .cqfw-header-avatar {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+#cqfw-widget-root .cqfw-header-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+#cqfw-widget-root .cqfw-header-avatar svg {
+	opacity: 1;
+	color: #ffffff;
+}
+
+#cqfw-widget-root .cqfw-online-dot {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 10px;
+	height: 10px;
+	background: var(--cq-green);
+	border: 2px solid var(--cq-teal);
+	border-radius: 50%;
+	box-shadow: 0 0 6px rgba(37, 211, 102, .6);
+}
+
+#cqfw-widget-root .cqfw-header-text {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+#cqfw-widget-root .cqfw-header-text strong {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.2;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#cqfw-widget-root .cqfw-pro-badge {
+	display: inline-block;
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .5px;
+	background: var(--cq-gold);
+	color: #fff;
+	padding: 2px 6px;
+	border-radius: 4px;
+	line-height: 1.3;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .15);
+	box-shadow: 0 2px 6px rgba(245, 158, 11, .35);
+	flex-shrink: 0;
+}
+
+#cqfw-widget-root .cqfw-header-text p {
+	margin: 1px 0 0;
+	font-size: 13px;
+	color: rgba(255, 255, 255, .75);
+	font-weight: 400;
+}
+
+#cqfw-widget-root .cqfw-chat-close {
+	margin-left: auto !important;
+	flex-shrink: 0;
+	width: 32px !important;
+	height: 32px !important;
+	border-radius: 50% !important;
+	border: 0 !important;
+	background: transparent !important;
+	color: rgba(255, 255, 255, .8) !important;
+	cursor: pointer !important;
+	font-size: 22px !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all .2s var(--cq-transition);
+	padding: 0 !important;
+	margin: 0 !important;
+	box-shadow: none !important;
+	line-height: 1 !important;
+}
+
+#cqfw-widget-root .cqfw-chat-close:hover {
+	background: rgba(255, 255, 255, .12) !important;
+	color: #fff !important;
+}
+
+/* ---------- Messages Area ---------- */
+#cqfw-widget-root .cqfw-chat-panel__messages {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 12px 12px;
+	flex: 1 1 auto;
+	min-height: 120px;
+	max-height: 380px;
+	overflow-y: auto;
+	scroll-behavior: smooth;
+}
+
+#cqfw-widget-root .cqfw-chat-panel__messages::-webkit-scrollbar {
+	width: 5px;
+}
+
+#cqfw-widget-root .cqfw-chat-panel__messages::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+#cqfw-widget-root .cqfw-chat-panel__messages::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, .12);
+	border-radius: 10px;
+}
+
+/* ---------- Bubbles ---------- */
+#cqfw-widget-root .cqfw-bubble {
+	max-width: 85%;
+	margin: 0 !important;
+	padding: 6px 7px 8px 9px !important;
+	border-radius: var(--cq-radius-bubble);
+	font-size: 14.2px;
+	line-height: 1.35;
+	white-space: pre-wrap;
+	word-break: break-word;
+	box-shadow: 0 1px .5px rgba(11, 20, 26, .13);
+	position: relative;
+	animation: cq-msg-in .25s var(--cq-transition);
+}
+
+@keyframes cq-msg-in {
+	from {
+		opacity: 0;
+		transform: translateY(6px) scale(.97);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* Received messages (admin/bot) — white, left */
+#cqfw-widget-root .cqfw-bubble.is-bot {
+	background: var(--cq-bubble-in);
+	color: var(--cq-text);
+	border-top-left-radius: 0;
+	align-self: flex-start;
+}
+
+#cqfw-widget-root .cqfw-bubble.is-bot::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -8px;
+	border-top: 0 solid transparent;
+	border-right: 8px solid var(--cq-bubble-in);
+	border-bottom: 13px solid transparent;
+}
+
+/* Sent messages (visitor) — green, right */
+#cqfw-widget-root .cqfw-bubble.is-user {
+	background: var(--cq-bubble-out);
+	color: var(--cq-text);
+	border-top-right-radius: 0;
+	align-self: flex-end;
+}
+
+#cqfw-widget-root .cqfw-bubble.is-user::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: -8px;
+	border-top: 0 solid transparent;
+	border-left: 8px solid var(--cq-bubble-out);
+	border-bottom: 13px solid transparent;
+}
+
+/* Error messages */
+#cqfw-widget-root .cqfw-bubble.is-error {
+	background: #fff;
+	color: #ef4444;
+	align-self: flex-start;
+	font-style: italic;
+	font-size: 13px;
+}
+
+/* System / context messages */
+#cqfw-widget-root .cqfw-bubble.is-context {
+	align-self: center;
+	background: rgba(225, 243, 251, .92);
+	color: var(--cq-text);
+	font-size: 12.5px;
+	text-align: center;
+	border-radius: var(--cq-radius-bubble);
+	padding: 5px 12px 6px;
+	box-shadow: 0 1px .5px rgba(11, 20, 26, .13);
+	max-width: 90%;
+}
+
+/* Bubble timestamp */
+#cqfw-widget-root .cqfw-bubble-time {
+	font-size: 11px;
+	color: rgba(0, 0, 0, .45);
+	float: right;
+	margin: 4px 0 -4px 12px;
+	line-height: 15px;
+}
+
+/* ---------- Typing Indicator ---------- */
+#cqfw-widget-root .cqfw-typing-indicator {
+	align-self: flex-start;
+	background: var(--cq-bubble-in);
+	padding: 10px 16px;
+	border-radius: var(--cq-radius-bubble);
+	border-top-left-radius: 0;
+	box-shadow: 0 1px .5px rgba(11, 20, 26, .13);
+	display: none;
+	gap: 4px;
+	align-items: center;
+}
+
+#cqfw-widget-root .cqfw-typing-indicator::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -8px;
+	border-top: 0 solid transparent;
+	border-right: 8px solid var(--cq-bubble-in);
+	border-bottom: 13px solid transparent;
+}
+
+#cqfw-widget-root .cqfw-typing-indicator.is-visible {
+	display: inline-flex;
+	position: relative;
+}
+
+#cqfw-widget-root .cqfw-typing-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #90a4ae;
+	animation: cq-typing-bounce 1.4s ease-in-out infinite;
+}
+
+#cqfw-widget-root .cqfw-typing-dot:nth-child(2) {
+	animation-delay: .2s;
+}
+
+#cqfw-widget-root .cqfw-typing-dot:nth-child(3) {
+	animation-delay: .4s;
+}
+
+@keyframes cq-typing-bounce {
+
+	0%,
+	60%,
+	100% {
+		transform: translateY(0);
+		opacity: .4;
+	}
+
+	30% {
+		transform: translateY(-6px);
+		opacity: 1;
+	}
+}
+
+/* ---------- Product Context Card ---------- */
+#cqfw-widget-root .cqfw-product-card {
+	display: flex;
+	gap: 12px;
+	padding: 10px 12px;
+	background: var(--cq-bubble-in);
+	border-radius: 8px;
+	box-shadow: 0 1px .5px rgba(11, 20, 26, .13);
+	align-self: center;
+	max-width: 92%;
+	margin-bottom: 4px;
+}
+
+#cqfw-widget-root .cqfw-product-card__img {
+	width: 52px;
+	height: 52px;
+	border-radius: 6px;
+	object-fit: cover;
+	background: var(--cq-surface);
+	flex-shrink: 0;
+}
+
+#cqfw-widget-root .cqfw-product-card__info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 2px;
+	min-width: 0;
+}
+
+#cqfw-widget-root .cqfw-product-card__name {
+	font-size: 13.5px;
+	font-weight: 600;
+	color: var(--cq-text);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#cqfw-widget-root .cqfw-product-card__price {
+	font-size: 13px;
+	color: var(--cq-green);
+	font-weight: 600;
+}
+
+/* ---------- Form Container ---------- */
+#cqfw-widget-root .cqfw-chat-form-container {
+	padding: 8px 10px 12px;
+	background: var(--cq-surface);
+	flex-shrink: 0;
+}
+
+#cqfw-widget-root .cqfw-chat-form {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+#cqfw-widget-root .cqfw-chat-reset {
+	background: transparent !important;
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 0 4px 0 !important;
+	color: var(--cq-text-secondary) !important;
+	font-size: 13px !important;
+	cursor: pointer !important;
+	text-align: center !important;
+	text-shadow: none !important;
+	box-shadow: none !important;
+	text-transform: none !important;
+}
+
+#cqfw-widget-root .cqfw-chat-reset:hover {
+	color: var(--cq-teal) !important;
+	text-decoration: underline !important;
+}
+
+/* Form inputs (name + phone) */
+#cqfw-widget-root .cqfw-form-inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+#cqfw-widget-root .cqfw-form-inputs input {
+	width: 100%;
+	margin: 0 !important;
+	padding: 10px 14px !important;
+	border: 1px solid var(--cq-border) !important;
+	border-radius: 8px;
+	background: #fff;
+	color: var(--cq-text);
+	font-size: 14px;
+	font-family: var(--cq-font);
+	transition: box-shadow .2s ease;
+}
+
+#cqfw-widget-root .cqfw-form-inputs input:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px rgba(7, 94, 84, .2);
+}
+
+#cqfw-widget-root .cqfw-form-inputs input::placeholder {
+	color: #b0bec5;
+}
+
+/* ---------- Modern Pill Input Bar & PRO Features ---------- */
+#cqfw-widget-root .cqfw-message-input-wrapper {
+	display: flex;
+	align-items: center;
+	background: #ffffff;
+	border: 1.5px solid #e2e8f0;
+	border-radius: 999px !important;
+	padding: 3px 5px 3px 5px !important;
+	gap: 6px;
+	position: relative;
+	transition: border-color .2s ease, box-shadow .2s ease;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+#cqfw-widget-root .cqfw-message-input-wrapper:focus-within {
+	border-color: #cbd5e1;
+	box-shadow: 0 0 0 2px rgba(15, 118, 110, .12);
+}
+
+/* Attachment Dropdown & Button */
+#cqfw-widget-root .cqfw-attach-dropdown {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+#cqfw-widget-root .cqfw-chat-attach-btn {
+	width: 32px !important;
+	height: 32px !important;
+	min-width: 32px !important;
+	border-radius: 50% !important;
+	border: none !important;
+	background: #f1f5f9 !important;
+	color: #1e293b !important;
+	cursor: pointer !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	box-shadow: none !important;
+	transition: all .2s ease !important;
+	outline: none !important;
+}
+
+#cqfw-widget-root .cqfw-chat-attach-btn:hover {
+	background: #e2e8f0 !important;
+	color: #0f172a !important;
+	transform: scale(1.05);
+}
+
+/* Attachment Menu (Dark Floating Card as in Screenshot 2) */
+#cqfw-widget-root .cqfw-attach-menu {
+	position: absolute;
+	bottom: calc(100% + 10px);
+	left: 0;
+	z-index: 1000;
+	min-width: 175px;
+	background: #3f3f46;
+	border-radius: 12px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	animation: cq-menu-pop .2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#cqfw-widget-root .cqfw-attach-menu[hidden] {
+	display: none !important;
+}
+
+#cqfw-widget-root .cqfw-attach-item {
+	background: transparent !important;
+	border: none !important;
+	color: #ffffff !important;
+	padding: 9px 12px !important;
+	border-radius: 8px !important;
+	font-size: 13.5px !important;
+	font-weight: 500 !important;
+	font-family: inherit !important;
+	display: flex !important;
+	align-items: center !important;
+	gap: 10px !important;
+	cursor: pointer !important;
+	text-align: left !important;
+	width: 100% !important;
+	box-shadow: none !important;
+	transition: background .15s ease !important;
+	outline: none !important;
+	line-height: normal !important;
+}
+
+#cqfw-widget-root .cqfw-attach-item:hover {
+	background: #52525b !important;
+	color: #ffffff !important;
+}
+
+#cqfw-widget-root .cqfw-attach-item svg {
+	width: 18px;
+	height: 18px;
+	stroke: currentColor;
+	flex-shrink: 0;
+}
+
+/* Message Textarea */
+#cqfw-widget-root .cqfw-message-input-wrapper textarea {
+	flex: 1 1 auto;
+	border: 0 !important;
+	margin: 0 !important;
+	background: transparent !important;
+	padding: 7px 4px !important;
+	resize: none;
+	max-height: 80px;
+	min-height: 20px;
+	font-size: 14.5px;
+	line-height: 1.35;
+	color: var(--cq-text);
+	font-family: inherit;
+	overflow-y: auto;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+#cqfw-widget-root .cqfw-message-input-wrapper textarea::placeholder {
+	color: #94a3b8;
+}
+
+/* Emoji Dropdown & Button */
+#cqfw-widget-root .cqfw-emoji-dropdown {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+#cqfw-widget-root .cqfw-chat-emoji-btn {
+	width: 32px !important;
+	height: 32px !important;
+	min-width: 32px !important;
+	border-radius: 50% !important;
+	border: none !important;
+	background: #f1f5f9 !important;
+	color: #334155 !important;
+	cursor: pointer !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	box-shadow: none !important;
+	transition: all .2s ease !important;
+	outline: none !important;
+}
+
+#cqfw-widget-root .cqfw-chat-emoji-btn:hover {
+	background: #e2e8f0 !important;
+	color: #0f172a !important;
+	transform: scale(1.05);
+}
+
+/* Emoji Picker Popup (Floating Pill Grid as in Screenshot 3) */
+#cqfw-widget-root .cqfw-emoji-picker {
+	position: absolute;
+	bottom: calc(100% + 10px);
+	right: 0;
+	z-index: 1000;
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 20px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+	padding: 10px 12px;
+	animation: cq-menu-pop .2s cubic-bezier(0.16, 1, 0.3, 1);
+	width: max-content;
+}
+
+#cqfw-widget-root .cqfw-emoji-picker[hidden] {
+	display: none !important;
+}
+
+#cqfw-widget-root .cqfw-emoji-grid {
+	display: grid;
+	grid-template-columns: repeat(8, 32px);
+	gap: 6px;
+}
+
+#cqfw-widget-root .cqfw-emoji-item {
+	width: 32px !important;
+	height: 32px !important;
+	padding: 0 !important;
+	border: none !important;
+	background: transparent !important;
+	cursor: pointer !important;
+	font-size: 21px !important;
+	line-height: 1 !important;
+	border-radius: 50% !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	transition: transform .15s ease, background .15s ease !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+#cqfw-widget-root .cqfw-emoji-item:hover {
+	transform: scale(1.25);
+	background: #f1f5f9 !important;
+}
+
+/* Send Button (Upward Arrow as in Screenshot 1) */
+#cqfw-widget-root .cqfw-chat-send {
+	width: 32px !important;
+	height: 32px !important;
+	min-width: 32px !important;
+	border-radius: 50% !important;
+	border: none !important;
+	background: #e2e8f0 !important;
+	color: #64748b !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	box-shadow: none !important;
+	cursor: pointer !important;
+	transition: all .2s ease !important;
+	flex-shrink: 0;
+	outline: none !important;
+}
+
+#cqfw-widget-root .cqfw-message-input-wrapper.has-content .cqfw-chat-send,
+#cqfw-widget-root .cqfw-message-input-wrapper.has-file .cqfw-chat-send {
+	background: var(--cq-green, #10b981) !important;
+	color: #ffffff !important;
+	box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35) !important;
+}
+
+#cqfw-widget-root .cqfw-chat-send:hover {
+	transform: scale(1.08);
+}
+
+#cqfw-widget-root .cqfw-chat-send svg {
+	width: 18px !important;
+	height: 18px !important;
+	stroke: currentColor !important;
+	fill: none !important;
+}
+
+/* Attachment Preview Chip */
+#cqfw-widget-root .cqfw-attachment-preview {
+	margin-bottom: 6px;
+	animation: cq-msg-in .2s ease;
+}
+
+#cqfw-widget-root .cqfw-attachment-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 10px;
+	background: #e0f2fe;
+	color: #0369a1;
+	border-radius: 20px;
+	font-size: 12.5px;
+	font-weight: 500;
+	max-width: 100%;
+}
+
+#cqfw-widget-root .cqfw-attachment-name {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 200px;
+}
+
+#cqfw-widget-root .cqfw-attachment-remove {
+	background: transparent !important;
+	border: none !important;
+	color: #0369a1 !important;
+	font-size: 16px !important;
+	line-height: 1 !important;
+	cursor: pointer !important;
+	padding: 0 0 0 2px !important;
+	margin: 0 !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+#cqfw-widget-root .cqfw-attachment-remove:hover {
+	color: #b91c1c !important;
+}
+
+@keyframes cq-menu-pop {
+	from {
+		opacity: 0;
+		transform: translateY(6px) scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+/* ---------- Options Panel ---------- */
+#cqfw-widget-root .cqfw-chat-panel__options {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-top: 10px;
+}
+
+#cqfw-widget-root .cqfw-option {
+	padding: 10px 16px !important;
+	border-radius: 8px !important;
+	background: #fff !important;
+	color: var(--cq-text) !important;
+	border: 1px solid var(--cq-border) !important;
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	font-family: var(--cq-font) !important;
+	text-align: center !important;
+	cursor: pointer !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 8px !important;
+	transition: all .2s ease !important;
+	text-decoration: none !important;
+	line-height: normal !important;
+}
+
+#cqfw-widget-root .cqfw-option:hover {
+	background: #f5f6f6 !important;
+	color: var(--cq-text) !important;
+}
+
+#cqfw-widget-root .cqfw-option--whatsapp {
+	background: var(--cq-green) !important;
+	color: #fff !important;
+	border: 0 !important;
+	font-weight: 600 !important;
+}
+
+#cqfw-widget-root .cqfw-option--whatsapp:hover {
+	background: var(--cq-green-hover) !important;
+	color: #fff !important;
+}
+
+/* ---------- Success Animation ---------- */
+#cqfw-widget-root .cqfw-success-check {
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	padding: 24px;
+	animation: cq-msg-in .4s var(--cq-transition);
+}
+
+#cqfw-widget-root .cqfw-success-check__circle {
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	background: var(--cq-green);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	animation: cq-check-pop .5s var(--cq-transition);
+}
+
+@keyframes cq-check-pop {
+	0% {
+		transform: scale(0);
+	}
+
+	60% {
+		transform: scale(1.2);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+#cqfw-widget-root .cqfw-success-check__circle svg {
+	width: 28px;
+	height: 28px;
+	color: #fff;
+}
+
+#cqfw-widget-root .cqfw-success-check__text {
+	font-size: 14px;
+	color: var(--cq-text-secondary);
+	text-align: center;
+}
+
+/* ---------- Quick Replies ---------- */
+#cqfw-widget-root .cqfw-quick-replies {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	padding: 0 12px 8px;
+}
+
+#cqfw-widget-root .cqfw-quick-reply {
+	padding: 6px 14px;
+	border-radius: var(--cq-radius-pill);
+	border: 1px solid var(--cq-teal);
+	background: transparent;
+	color: var(--cq-teal);
+	font-size: 13px;
+	font-family: var(--cq-font);
+	cursor: pointer;
+	transition: all .2s ease;
+	white-space: nowrap;
+}
+
+#cqfw-widget-root .cqfw-quick-reply:hover {
+	background: var(--cq-teal);
+	color: #fff;
+}
+
+/* ---------- Screen Reader ---------- */
+#cqfw-widget-root .screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* ---------- WooCommerce Product/Shop/Cart Buttons ---------- */
+.cqfw-product-cta,
+.cqfw-shop-cta,
+.cqfw-cart-cta {
+	margin: 1.25rem 0;
+	display: flex;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	box-sizing: border-box;
+}
+
+/* WooCommerce Cart block — sit under Proceed to Checkout */
+.wc-block-cart .cqfw-cart-cta,
+.wp-block-woocommerce-cart-totals-block .cqfw-cart-cta,
+.wp-block-woocommerce-proceed-to-checkout-block + .cqfw-cart-cta {
+	margin-top: 0.75rem;
+	margin-bottom: 0;
+}
+
+.wc-block-cart .cqfw-cart-cta .cqfw-wa-button {
+	width: 100%;
+	justify-content: center;
+}
+
+/* Shared CTA wrap (admin preview + frontend) */
+.cqfw-cta-wrap {
+	display: flex;
+	width: 100%;
+	gap: 10px;
+	box-sizing: border-box;
+}
+
+.cqfw-cta-layout--stack {
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.cqfw-cta-layout--row {
+	flex-direction: row;
+	align-items: stretch;
+	flex-wrap: nowrap;
+	gap: 8px;
+}
+
+.cqfw-cta-atc-mock,
+.cqfw-cta-wa-btn {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 8px !important;
+	padding: 12px 18px !important;
+	font-weight: 700 !important;
+	font-size: 14px !important;
+	line-height: 1.3 !important;
+	text-decoration: none !important;
+	width: 100%;
+	box-sizing: border-box;
+	cursor: default;
+}
+
+.cqfw-cta-layout--row .cqfw-cta-atc-mock,
+.cqfw-cta-layout--row .cqfw-cta-wa-btn {
+	flex: 1 1 0;
+	width: auto;
+	min-width: 0;
+	max-width: none;
+}
+
+/* Explicit order: left = Add to Cart, right = Buy */
+.cqfw-cta-layout--row .cqfw-cta-atc-mock {
+	order: 1;
+}
+
+.cqfw-cta-layout--row .cqfw-cta-wa-btn {
+	order: 2;
+}
+
+.cqfw-cta-atc-mock {
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.cqfw-cta-cart-icon {
+	flex-shrink: 0;
+}
+
+/* Soft-match Woo Add to Cart next to our CTA on product pages */
+body.cqfw-cta-active.cqfw-cta-layout--stack form.cart,
+body.cqfw-cta-active.cqfw-cta-layout--stack .woocommerce-variation-add-to-cart {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 10px;
+}
+
+body.cqfw-cta-active.cqfw-cta-layout--row form.cart,
+body.cqfw-cta-active.cqfw-cta-layout--row .woocommerce-variation-add-to-cart {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: stretch;
+	gap: 8px;
+}
+
+body.cqfw-cta-active.cqfw-cta-layout--row form.cart .quantity {
+	flex: 0 0 auto;
+}
+
+body.cqfw-cta-active.cqfw-cta-layout--row form.cart .single_add_to_cart_button {
+	order: 1;
+	flex: 1 1 0;
+}
+
+body.cqfw-cta-active.cqfw-cta-layout--row form.cart .cqfw-product-cta {
+	order: 2;
+	flex: 1 1 0;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	min-width: 0;
+}
+
+body.cqfw-cta-active.cqfw-cta-layout--row form.cart .cqfw-product-cta .cqfw-cta-wa-btn {
+	width: 100%;
+}
+
+body.cqfw-cta-active.cqfw-cta-layout--row form.cart .single_add_to_cart_button,
+body.cqfw-cta-active.cqfw-cta-layout--row form.cart .cqfw-product-cta {
+	flex: 1 1 0;
+}
+
+body.cqfw-cta-active form.cart .cqfw-product-cta {
+	margin: 0;
+	padding: 0;
+	width: auto;
+	flex: 1 1 auto;
+}
+
+body.cqfw-cta-active form.cart .single_add_to_cart_button {
+	border-radius: var(--cqfw-cta-radius, 999px) !important;
+	background-color: var(--cqfw-cta-atc-bg, #22c55e) !important;
+	color: var(--cqfw-cta-atc-text, #ffffff) !important;
+	border: none !important;
+}
+
+/* ---------- Theme-agnostic shop pair (plugin owns ATC + Buy) ---------- */
+.cqfw-shop-loop-actions.cqfw-cta-has-pair {
+	display: flex !important;
+	width: 100% !important;
+	gap: 8px !important;
+	margin: 10px 0 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	clear: both !important;
+}
+
+.cqfw-shop-loop-actions.cqfw-cta-layout--stack {
+	flex-direction: column !important;
+	align-items: stretch !important;
+}
+
+.cqfw-shop-loop-actions.cqfw-cta-layout--row {
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	align-items: stretch !important;
+}
+
+.cqfw-shop-loop-actions .cqfw-cta-atc-btn,
+.cqfw-shop-loop-actions .cqfw-cta-wa-btn {
+	flex: 1 1 0 !important;
+	width: auto !important;
+	min-width: 0 !important;
+	margin: 0 !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	text-align: center !important;
+	text-decoration: none !important;
+	box-shadow: none !important;
+	float: none !important;
+	padding: 12px 14px !important;
+	font-weight: 700 !important;
+	font-size: 14px !important;
+	line-height: 1.3 !important;
+	box-sizing: border-box !important;
+}
+
+.cqfw-shop-loop-actions.cqfw-cta-layout--stack .cqfw-cta-atc-btn,
+.cqfw-shop-loop-actions.cqfw-cta-layout--stack .cqfw-cta-wa-btn {
+	width: 100% !important;
+	flex: 0 0 auto !important;
+}
+
+/* Hide theme/default ATC when our pair is present (any theme markup) */
+body.cqfw-cta-active li.product:has(.cqfw-shop-loop-actions) > a.button:not(.cqfw-cta-atc-btn):not(.cqfw-cta-wa-btn),
+body.cqfw-cta-active li.product:has(.cqfw-shop-loop-actions) > button.button:not(.cqfw-cta-atc-btn),
+body.cqfw-cta-active .wc-block-product:has(.cqfw-shop-loop-actions) .wp-block-button,
+body.cqfw-cta-active .wc-block-grid__product:has(.cqfw-shop-loop-actions) .wp-block-button,
+body.cqfw-cta-active .wc-block-product:has(.cqfw-shop-loop-actions) .wc-block-components-product-button,
+body.cqfw-cta-active .wp-block-post:has(.cqfw-shop-loop-actions) .wp-block-woocommerce-product-button,
+body.cqfw-cta-active .cqfw-has-cta-pair > a.button:not(.cqfw-cta-atc-btn):not(.cqfw-cta-wa-btn),
+body.cqfw-cta-active .cqfw-has-cta-pair > button.button:not(.cqfw-cta-atc-btn) {
+	display: none !important;
+}
+
+/* Shop loop: left Add to Cart, right Buy (legacy grid helpers for older markup) */
+body.cqfw-cta-active.cqfw-cta-layout--stack ul.products li.product .cqfw-shop-loop-actions {
+	display: flex;
+	width: 100%;
+}
+
+a.cqfw-inline-btn,
+button.cqfw-inline-btn,
+.woocommerce a.cqfw-inline-btn,
+.woocommerce button.cqfw-inline-btn,
+.woocommerce-page a.cqfw-inline-btn,
+.woocommerce-page button.cqfw-inline-btn,
+.woocommerce form.cart a.cqfw-inline-btn,
+.woocommerce form.cart button.cqfw-inline-btn {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 8px !important;
+	padding: 10px 20px !important;
+	border-radius: 6px !important;
+	background-color: var(--cq-green) !important;
+	background-image: none !important;
+	color: #ffffff !important;
+	border: none !important;
+	text-decoration: none !important;
+	font-weight: 600 !important;
+	font-size: 15px !important;
+	line-height: 1.5 !important;
+	box-shadow: 0 4px 14px rgba(37, 211, 102, .4) !important;
+	transition: all .25s var(--cq-transition) !important;
+	-webkit-text-stroke: 0 !important;
+	text-shadow: none !important;
+	outline: none !important;
+	margin: 0 !important;
+	letter-spacing: normal !important;
+}
+
+/* Styled shop/product WA button overrides when using CTA styles */
+a.cqfw-inline-btn.cqfw-cta-wa-btn,
+.woocommerce a.cqfw-inline-btn.cqfw-cta-wa-btn {
+	width: 100%;
+	box-shadow: none !important;
+}
+
+.cqfw-cta-variant--outline a.cqfw-inline-btn.cqfw-cta-wa-btn:hover,
+.woocommerce .cqfw-cta-variant--outline a.cqfw-inline-btn.cqfw-cta-wa-btn:hover {
+	transform: translateY(-1px) !important;
+	opacity: 0.92;
+}
+
+a.cqfw-inline-btn:hover,
+button.cqfw-inline-btn:hover,
+.woocommerce a.cqfw-inline-btn:hover,
+.woocommerce form.cart a.cqfw-inline-btn:hover {
+	background-color: var(--cq-green-hover) !important;
+	color: #ffffff !important;
+	transform: translateY(-2px) !important;
+	box-shadow: 0 6px 20px rgba(37, 211, 102, .5) !important;
+	border: none !important;
+	text-decoration: none !important;
+}
+
+/* Keep outline hover readable */
+.cqfw-cta-variant--outline a.cqfw-inline-btn.cqfw-cta-wa-btn:hover,
+.woocommerce .cqfw-cta-variant--outline a.cqfw-inline-btn.cqfw-cta-wa-btn:hover {
+	background-color: inherit !important;
+	color: inherit !important;
+	border-width: 2px !important;
+	box-shadow: none !important;
+}
+
+.cqfw-inline-btn .cqfw-button-icon {
+	width: 20px;
+	height: 20px;
+}
+
+#cqfw-widget-root .cqfw-button-icon {
+	display: inline-block;
+	flex: 0 0 auto;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.cqfw-button-svg-icon {
+	width: 25px;
+	height: 25px;
+	fill: currentColor;
+	flex-shrink: 0;
+}
+
+/* ---------- Multi-Agent Cards View (Click to Chat) ---------- */
+#cqfw-widget-root .cqfw-multi-agent-view {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	background: #f0f2f5;
+}
+
+#cqfw-widget-root .cqfw-multi-agent-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: 18px 20px 16px;
+	background: #00a884;
+	color: #fff;
+	position: relative;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+#cqfw-widget-root .cqfw-multi-agent-titles {
+	flex: 1;
+	min-width: 0;
+	padding-right: 12px;
+}
+
+#cqfw-widget-root .cqfw-multi-agent-title {
+	font-size: 20px !important;
+	font-weight: 700 !important;
+	color: #ffffff !important;
+	margin: 0 !important;
+	line-height: 1.2 !important;
+	letter-spacing: -0.2px;
+}
+
+#cqfw-widget-root .cqfw-multi-agent-subtitle {
+	font-size: 13.5px !important;
+	font-weight: 400 !important;
+	color: rgba(255, 255, 255, 0.9) !important;
+	margin: 4px 0 0 0 !important;
+	line-height: 1.3 !important;
+}
+
+#cqfw-widget-root .cqfw-multi-agent-cards {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 14px 14px 10px;
+	max-height: 380px;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	background: #f0f2f5;
+}
+
+#cqfw-widget-root .cqfw-agent-card {
+	background: #ffffff;
+	border-radius: 12px;
+	padding: 13px 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+	border: 1px solid #f1f5f9;
+	cursor: pointer;
+	text-decoration: none;
+	user-select: none;
+	outline: none !important;
+	-webkit-tap-highlight-color: transparent;
+	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease;
+}
+
+#cqfw-widget-root .cqfw-agent-card:focus,
+#cqfw-widget-root .cqfw-agent-card:focus-visible,
+#cqfw-widget-root .cqfw-agent-card:active {
+	outline: none !important;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
+	border-color: #f1f5f9 !important;
+}
+
+#cqfw-widget-root .cqfw-agent-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+	border-color: #e2e8f0;
+}
+
+#cqfw-widget-root .cqfw-agent-card__avatar-wrap {
+	position: relative;
+	width: 52px;
+	height: 52px;
+	min-width: 52px;
+	min-height: 52px;
+	flex-shrink: 0;
+}
+
+#cqfw-widget-root .cqfw-agent-card__avatar-img {
+	width: 52px !important;
+	height: 52px !important;
+	object-fit: cover !important;
+	border-radius: 50% !important;
+	display: block !important;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+#cqfw-widget-root .cqfw-agent-card__avatar-initial {
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+	font-size: 20px;
+	font-weight: 600;
+	color: #ffffff;
+	text-transform: uppercase;
+	user-select: none;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#cqfw-widget-root .cqfw-agent-card__avatar-initial[data-idx="0"] { background: linear-gradient(135deg, #059669, #10b981); }
+#cqfw-widget-root .cqfw-agent-card__avatar-initial[data-idx="1"] { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+#cqfw-widget-root .cqfw-agent-card__avatar-initial[data-idx="2"] { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+#cqfw-widget-root .cqfw-agent-card__avatar-initial[data-idx="3"] { background: linear-gradient(135deg, #d97706, #f59e0b); }
+#cqfw-widget-root .cqfw-agent-card__avatar-initial[data-idx="4"] { background: linear-gradient(135deg, #db2777, #ec4899); }
+
+#cqfw-widget-root .cqfw-agent-card__content {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+#cqfw-widget-root .cqfw-agent-card__name {
+	font-size: 16px !important;
+	font-weight: 700 !important;
+	color: #1e293b !important;
+	line-height: 1.25 !important;
+	letter-spacing: -0.2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#cqfw-widget-root .cqfw-agent-card__dept {
+	font-size: 13px !important;
+	font-weight: 400 !important;
+	color: #64748b !important;
+	margin-top: 3px !important;
+	line-height: 1.3 !important;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#cqfw-widget-root .cqfw-agent-card__action {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+#cqfw-widget-root .cqfw-agent-card__wa-svg {
+	width: 28px !important;
+	height: 28px !important;
+	flex-shrink: 0;
+	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#cqfw-widget-root .cqfw-agent-card__wa-svg.is-online {
+	color: #25D366 !important;
+}
+
+#cqfw-widget-root .cqfw-agent-card__wa-svg.is-offline {
+	color: #94a3b8 !important;
+}
+
+#cqfw-widget-root .cqfw-agent-card:hover .cqfw-agent-card__wa-svg.is-online {
+	transform: scale(1.12);
+}
+
+/* Status dot on avatar */
+#cqfw-widget-root .cqfw-agent-status-dot {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+	border: 2px solid #ffffff;
+	z-index: 2;
+}
+
+#cqfw-widget-root .cqfw-agent-status-dot.is-online {
+	background: #22c55e;
+	box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25);
+}
+
+#cqfw-widget-root .cqfw-agent-status-dot.is-offline {
+	background: #94a3b8;
+}
+
+/* Offline Agent Card State */
+#cqfw-widget-root .cqfw-agent-card.is-offline {
+	opacity: 0.6;
+	background: #f8fafc !important;
+	cursor: not-allowed !important;
+}
+
+#cqfw-widget-root .cqfw-agent-card.is-offline:hover {
+	transform: none !important;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
+	border-color: #f1f5f9 !important;
+}
+
+#cqfw-widget-root .cqfw-agent-card.is-offline .cqfw-agent-card__avatar-wrap {
+	filter: grayscale(80%);
+}
+
+#cqfw-widget-root .cqfw-agent-card.is-offline .cqfw-agent-card__name {
+	color: #64748b !important;
+}
+
+#cqfw-widget-root .cqfw-agent-card__offline-indicator {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: #94a3b8;
+	font-size: 12.5px;
+	font-weight: 600;
+}
+
+#cqfw-widget-root .cqfw-agent-card__wa-svg.is-offline {
+	width: 22px !important;
+	height: 22px !important;
+}
+
+/* Multi-Agent Footer Container */
+#cqfw-widget-root .cqfw-multi-agent-footer {
+	background: #ffffff !important;
+	padding: 4px 16px 18px 16px !important;
+	width: 100% !important;
+	box-sizing: border-box !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	text-align: center !important;
+}
+
+/* Pill Button - ALWAYS single-line, full width, beautifully centered */
+#cqfw-widget-root .cqfw-switch-to-webchat,
+#cqfw-widget-root .cqfw-pill-footer-btn {
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box !important;
+	background: #ffffff !important;
+	border: 1.5px solid #00a884 !important;
+	border-radius: 9999px !important;
+	padding: 11px 16px !important;
+	font-size: 13.5px !important;
+	font-weight: 600 !important;
+	color: #00a884 !important;
+	cursor: pointer !important;
+	box-shadow: none !important;
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 8px !important;
+	white-space: nowrap !important;
+	text-decoration: none !important;
+	outline: none !important;
+	line-height: 1 !important;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#cqfw-widget-root .cqfw-switch-to-webchat:hover,
+#cqfw-widget-root .cqfw-pill-footer-btn:hover {
+	background: #f0fdf4 !important;
+	border-color: #008f6f !important;
+	color: #008f6f !important;
+	transform: translateY(-1px) !important;
+	box-shadow: 0 4px 12px rgba(0, 168, 132, 0.15) !important;
+}
+
+#cqfw-widget-root .cqfw-pill-footer-icon {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	flex-shrink: 0 !important;
+	line-height: 1 !important;
+}
+
+#cqfw-widget-root .cqfw-pill-footer-icon svg {
+	width: 20px !important;
+	height: 20px !important;
+	display: block !important;
+}
+
+#cqfw-widget-root .cqfw-pill-footer-text {
+	color: #00a884 !important;
+	font-weight: 600 !important;
+	font-size: 13.5px !important;
+	line-height: 1.2 !important;
+	white-space: nowrap !important;
+	display: inline-block !important;
+	letter-spacing: -0.1px !important;
+}
+
+#cqfw-widget-root .cqfw-pill-footer-arrow {
+	color: #00a884 !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	flex-shrink: 0 !important;
+	margin-left: 2px !important;
+	line-height: 1 !important;
+	transition: transform 0.2s ease !important;
+}
+
+#cqfw-widget-root .cqfw-pill-footer-arrow svg {
+	width: 16px !important;
+	height: 16px !important;
+	display: block !important;
+}
+
+#cqfw-widget-root .cqfw-switch-to-webchat:hover .cqfw-pill-footer-arrow,
+#cqfw-widget-root .cqfw-pill-footer-btn:hover .cqfw-pill-footer-arrow {
+	transform: translateX(3px) !important;
+}
+
+#cqfw-widget-root .cqfw-back-to-agents {
+	background: transparent !important;
+	border: none !important;
+	color: #ffffff !important;
+	cursor: pointer;
+	padding: 4px 6px 4px 0 !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.85;
+	transition: opacity 0.2s;
+	outline: none;
+}
+
+#cqfw-widget-root .cqfw-back-to-agents:hover {
+	opacity: 1;
+}
+
+#cqfw-widget-root .cqfw-webchat-view {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+	#cqfw-widget-root {
+		right: 14px;
+		left: auto;
+		bottom: 14px;
+	}
+
+	#cqfw-widget-root.cqfw-pos-left {
+		right: auto;
+		left: 14px;
+	}
+
+	#cqfw-widget-root .cqfw-floating-button--icon-only {
+		width: 56px;
+		height: 56px;
+	}
+
+	/*
+	 * Mobile open = same floating card as desktop (not a full-width bottom sheet).
+	 * Keeps corner position, rounded card, and overlay feel consistent on phones.
+	 */
+	#cqfw-widget-root.is-open {
+		position: fixed !important;
+		inset: 0 !important;
+		width: 100% !important;
+		height: 100% !important;
+		pointer-events: none !important;
+		z-index: 9999999 !important;
+		background: transparent !important;
+	}
+
+	#cqfw-widget-root.is-open::before {
+		content: "";
+		position: fixed;
+		inset: 0;
+		background: rgba(15, 23, 42, 0.35);
+		pointer-events: auto;
+		z-index: 0;
+	}
+
+	#cqfw-widget-root.is-open .cqfw-floating-button,
+	#cqfw-widget-root.is-open .cqfw-floating-button[class*="cqfw-launcher--"],
+	#cqfw-widget-root.is-open .cqfw-floating-button::before,
+	#cqfw-widget-root.is-open .cqfw-floating-button::after {
+		display: none !important;
+		opacity: 0 !important;
+		visibility: hidden !important;
+		pointer-events: none !important;
+	}
+
+	#cqfw-widget-root .cqfw-chat-panel {
+		position: fixed !important;
+		right: 14px !important;
+		bottom: 14px !important;
+		left: auto !important;
+		top: auto !important;
+		width: min(380px, calc(100vw - 28px)) !important;
+		max-width: calc(100vw - 28px) !important;
+		max-height: min(84vh, 620px) !important;
+		height: auto !important;
+		border-radius: 18px !important;
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22), 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+		margin: 0 !important;
+		z-index: 1 !important;
+	}
+
+	#cqfw-widget-root .cqfw-chat-panel[aria-hidden="false"] {
+		pointer-events: auto !important;
+	}
+
+	#cqfw-widget-root.cqfw-pos-left .cqfw-chat-panel {
+		right: auto !important;
+		left: 14px !important;
+	}
+
+	#cqfw-widget-root .cqfw-chat-panel__messages {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 12px 12px;
+		flex: 1 1 auto;
+		min-height: 120px;
+		max-height: min(50vh, 380px);
+		overflow-y: auto;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	#cqfw-widget-root .cqfw-chat-form-container {
+		padding: 8px 12px max(12px, env(safe-area-inset-bottom, 12px)) !important;
+	}
+}
+
+/* ========================================================
+   Launcher Button Styles & Customizer Overrides
+   ======================================================== */
+
+/* Custom color overrides & Precise 1-to-1 Style Matching with Backend Preview */
+#cqfw-widget-root .cqfw-wa-svg-icon {
+	flex-shrink: 0;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#cqfw-widget-root .cqfw-wa-svg-icon path {
+	fill: currentColor !important;
+}
+
+/* Style 1: Theme Button (Free) - Matches Preview */
+#cqfw-widget-root .cqfw-floating-button.cqfw-launcher--style-1 {
+	width: auto !important;
+	height: auto !important;
+	min-height: 44px !important;
+	padding: 8px 20px !important;
+	border-radius: 999px !important;
+	background: var(--cq-button-custom-bg, #ffffff) !important;
+	color: var(--cq-button-custom-text, #1e293b) !important;
+	border: 1.5px solid #25D366 !important;
+	box-shadow: 0 4px 14px rgba(37, 211, 102, 0.15) !important;
+	gap: 8px !important;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	display: inline-flex !important;
+	align-items: center !important;
+}
+
+#cqfw-widget-root .cqfw-floating-button.cqfw-launcher--style-1 .cqfw-wa-svg-icon {
+	color: var(--cq-icon-custom-color, #25D366) !important;
+	fill: currentColor !important;
+	width: 22px !important;
+	height: 22px !important;
+}
+
+#cqfw-widget-root .cqfw-floating-button.cqfw-launcher--style-1 .cqfw-launcher-label {
+	color: inherit !important;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	line-height: 1 !important;
+}
+
+/* Style 2: Square Icon - Matches Preview */
+#cqfw-widget-root .cqfw-floating-button.cqfw-launcher--style-2 {
+	width: 58px !important;
+	height: 58px !important;
+	border-radius: 14px !important;
+	background: var(--cq-button-custom-bg, #25D366) !important;
+	box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4) !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	border: none !important;
+}
+
+#cqfw-widget-root .cqfw-floating-button.cqfw-launcher--style-2 .cqfw-wa-svg-icon {
+	color: var(--cq-icon-custom-color, #ffffff) !important;
+	fill: currentColor !important;
+	width: 32px !important;
+	height: 32px !important;
+}
+
+/* Style 2 free styles end above. Premium launcher styles stripped from free ZIP. */
+
+/* ==========================================================================
+   Popup Style 1: Modern Card Style (Matching 100% Reference Screenshot) — FREE
+   ========================================================================== */
+
+#cqfw-widget-root .cqfw-chat-panel {
+	border-radius: 20px !important;
+	overflow: hidden !important;
+	box-shadow: 0 16px 40px -8px rgba(0, 102, 255, 0.16), 0 8px 24px -4px rgba(0, 0, 0, 0.08) !important;
+	border: 1px solid rgba(226, 232, 240, 0.85) !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card {
+	background: #ffffff !important;
+	border-radius: 20px !important;
+	overflow: hidden !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-multi-agent-header {
+	background: #00a884 !important;
+	padding: 20px 20px 18px 20px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	box-shadow: none !important;
+	border-top-left-radius: 20px !important;
+	border-top-right-radius: 20px !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-multi-agent-header-left {
+	display: flex !important;
+	align-items: center !important;
+	gap: 14px !important;
+	flex: 1 !important;
+	min-width: 0 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-multi-agent-header-icon {
+	width: 42px !important;
+	height: 42px !important;
+	flex-shrink: 0 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-multi-agent-titles {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 2px !important;
+	padding-right: 8px !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-multi-agent-title {
+	font-size: 20px !important;
+	font-weight: 700 !important;
+	color: #ffffff !important;
+	line-height: 1.25 !important;
+	letter-spacing: -0.2px !important;
+	margin: 0 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-multi-agent-subtitle {
+	font-size: 13px !important;
+	font-weight: 400 !important;
+	color: rgba(255, 255, 255, 0.9) !important;
+	line-height: 1.35 !important;
+	margin: 0 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-chat-close {
+	color: #ffffff !important;
+	background: transparent !important;
+	border: none !important;
+	width: 32px !important;
+	height: 32px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	cursor: pointer !important;
+	opacity: 0.85 !important;
+	transition: opacity 0.2s ease, transform 0.2s ease !important;
+	padding: 0 !important;
+	border-radius: 50% !important;
+	flex-shrink: 0 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-chat-close:hover {
+	opacity: 1 !important;
+	transform: scale(1.1) !important;
+	background: rgba(255, 255, 255, 0.15) !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-multi-agent-cards {
+	background: #ffffff !important;
+	padding: 16px 16px 14px 16px !important;
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 12px !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card {
+	background: #ffffff !important;
+	border: 1.5px solid #e2e8f0 !important;
+	border-radius: 14px !important;
+	padding: 12px 16px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	gap: 14px !important;
+	box-shadow: none !important;
+	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card:hover {
+	border-color: #cbd5e1 !important;
+	transform: translateY(-2px) !important;
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Featured Card (Card 0 - Sales Support soft mint green) */
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card--featured {
+	background: #ffffff !important;
+	border-color: #e2e8f0 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card--featured:hover {
+	background: #eaf7f0 !important;
+	border-color: #a7f3d0 !important;
+	transform: translateY(-2px) !important;
+	box-shadow: 0 6px 18px rgba(16, 185, 129, 0.12) !important;
+}
+
+/* Avatar styling matching screenshot */
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card__avatar-wrap {
+	width: 52px !important;
+	height: 52px !important;
+	position: relative !important;
+	flex-shrink: 0 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card__avatar-initial {
+	width: 52px !important;
+	height: 52px !important;
+	border-radius: 50% !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	font-size: 22px !important;
+	font-weight: 700 !important;
+	color: #ffffff !important;
+	box-shadow: none !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card__avatar-initial[data-idx="0"] {
+	background: #10b981 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card__avatar-initial[data-idx="1"] {
+	background: #1877f2 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card__avatar-initial[data-idx="2"] {
+	background: #8b5cf6 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-status-dot {
+	position: absolute !important;
+	bottom: 1px !important;
+	right: 1px !important;
+	width: 14px !important;
+	height: 14px !important;
+	border-radius: 50% !important;
+	border: 2.5px solid #ffffff !important;
+	background: #22c55e !important;
+	box-shadow: none !important;
+	z-index: 2 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card__name {
+	font-size: 16px !important;
+	font-weight: 700 !important;
+	color: #111827 !important;
+	line-height: 1.25 !important;
+	margin: 0 0 2px 0 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card__dept {
+	font-size: 13px !important;
+	font-weight: 400 !important;
+	color: #6b7280 !important;
+	line-height: 1.3 !important;
+	margin: 0 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-agent-card__wa-svg.is-online {
+	color: #25D366 !important;
+	width: 28px !important;
+	height: 28px !important;
+}
+
+/* Footer & Pill Button */
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-multi-agent-footer {
+	background: #ffffff !important;
+	padding: 2px 16px 18px 16px !important;
+	text-align: center !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-pill-footer-btn {
+	width: 100% !important;
+	background: #ffffff !important;
+	border: 1.5px solid #00a884 !important;
+	border-radius: 9999px !important;
+	padding: 11px 18px !important;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	color: #00a884 !important;
+	cursor: pointer !important;
+	box-shadow: none !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 8px !important;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+	outline: none !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-pill-footer-btn:hover {
+	background: #f0fdf4 !important;
+	border-color: #008f6f !important;
+	color: #008f6f !important;
+	transform: translateY(-1px) !important;
+	box-shadow: 0 4px 12px rgba(0, 168, 132, 0.15) !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-pill-footer-icon {
+	display: flex !important;
+	align-items: center !important;
+	flex-shrink: 0 !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-pill-footer-text {
+	color: #00a884 !important;
+	font-weight: 600 !important;
+	font-size: 14px !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-pill-footer-arrow {
+	color: #00a884 !important;
+	display: flex !important;
+	align-items: center !important;
+	flex-shrink: 0 !important;
+	margin-left: 2px !important;
+	transition: transform 0.2s ease !important;
+}
+
+#cqfw-widget-root .cqfw-popup--modern-card .cqfw-pill-footer-btn:hover .cqfw-pill-footer-arrow {
+	transform: translateX(3px) !important;
+}
+
+/* Classic WhatsApp (Style 2) Front-End Overrides */
+#cqfw-widget-root .cqfw-popup--classic-whatsapp .cqfw-multi-agent-header {
+	background: #075e54 !important;
+	padding: 16px 18px !important;
+}
+
+#cqfw-widget-root .cqfw-popup--classic-whatsapp .cqfw-multi-agent-cards {
+	background: #efeae2 !important;
+	padding: 14px !important;
+	gap: 10px !important;
+}
+
+#cqfw-widget-root .cqfw-popup--classic-whatsapp .cqfw-agent-card {
+	background: #ffffff !important;
+	border: 1px solid #e2e8f0 !important;
+	border-left: 4px solid #25d366 !important;
+	border-radius: 10px !important;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+#cqfw-widget-root .cqfw-popup--classic-whatsapp .cqfw-multi-agent-footer {
+	background: #f0f2f5 !important;
+	padding: 8px 16px 14px 16px !important;
+}
+
+
+
+/* Visibility / triggers / entry (ships in free + pro) */
+#cqfw-widget-root.cqfw-is-hidden {
+	opacity: 0 !important;
+	pointer-events: none !important;
+	visibility: hidden !important;
+}
+#cqfw-widget-root.cqfw-is-ready {
+	opacity: 1 !important;
+	pointer-events: auto !important;
+	visibility: visible !important;
+}
+#cqfw-widget-root.cqfw-entry-fade.cqfw-is-ready {
+	animation: cqfwEntryFade 0.45s ease both;
+}
+#cqfw-widget-root.cqfw-entry-slide.cqfw-is-ready {
+	animation: cqfwEntrySlide 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+#cqfw-widget-root.cqfw-entry-bounce.cqfw-is-ready {
+	animation: cqfwEntryBounce 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+#cqfw-widget-root.cqfw-entry-zoom.cqfw-is-ready {
+	animation: cqfwEntryZoom 0.4s ease both;
+}
+@keyframes cqfwEntryFade {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+@keyframes cqfwEntrySlide {
+	from { opacity: 0; transform: translateY(18px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cqfwEntryBounce {
+	0% { opacity: 0; transform: scale(0.7); }
+	60% { opacity: 1; transform: scale(1.08); }
+	100% { transform: scale(1); }
+}
+@keyframes cqfwEntryZoom {
+	from { opacity: 0; transform: scale(0.85); }
+	to { opacity: 1; transform: scale(1); }
+}
+
+#cqfw-widget-root .cqfw-extra-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 10px 14px 12px;
+	border-top: 1px solid #e2e8f0;
+	background: #f8fafc;
+}
+#cqfw-widget-root .cqfw-extra-action {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 7px 12px;
+	border-radius: 999px;
+	border: 1px solid #cbd5e1;
+	background: #fff;
+	color: #0f766e;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	text-decoration: none;
+	line-height: 1.2;
+}
+#cqfw-widget-root .cqfw-extra-action:hover {
+	border-color: #0d9488;
+	background: #f0fdfa;
+	color: #0f766e;
+}
+#cqfw-widget-root .cqfw-greeting-bottom {
+	margin: 0 14px 10px;
+	padding: 8px 12px;
+	border-radius: 10px;
+	background: #f1f5f9;
+	color: #64748b;
+	font-size: 12px;
+	line-height: 1.4;
+}
+

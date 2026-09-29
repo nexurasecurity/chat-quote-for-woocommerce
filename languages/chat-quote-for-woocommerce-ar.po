@@ -1,0 +1,266 @@
+# Arabic translation for Chat Quote for WooCommerce.
+# Copyright (C) 2026 Prokash Sarker
+msgid ""
+msgstr ""
+"Project-Id-Version: Chat Quote for WooCommerce 1.1.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chat-quote-for-woocommerce\n"
+"POT-Creation-Date: 2026-07-22 04:56+0000\n"
+"PO-Revision-Date: 2026-07-22 04:56+0000\n"
+"Last-Translator: Prokash Sarker\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+"X-Generator: Antigravity IDE\n"
+"X-Domain: chat-quote-for-woocommerce\n"
+
+msgid "Chat on WhatsApp"
+msgstr "تحدث عبر واتساب"
+
+msgid "Request Quote"
+msgstr "طلب عرض سعر"
+
+msgid "Chat with us"
+msgstr "تحدث معنا"
+
+msgid "We usually reply quickly."
+msgstr "عادة ما نرد بسرعة."
+
+msgid "Close chat"
+msgstr "إغلاق المحادثة"
+
+msgid "Your name"
+msgstr "اسمك"
+
+msgid "Phone number"
+msgstr "رقم الهاتف"
+
+msgid "Message"
+msgstr "رسالة"
+
+msgid "Type your message..."
+msgstr "اكتب رسالتك..."
+
+msgid "Send"
+msgstr "إرسال"
+
+msgid "Continue on Website Chat"
+msgstr "متابعة المحادثة على الموقع"
+
+msgid "General Settings"
+msgstr "الإعدادات العامة"
+
+msgid "Chat Widget"
+msgstr "أداة المحادثة"
+
+msgid "WhatsApp Buttons"
+msgstr "أزرار واتساب"
+
+msgid "WhatsApp Number"
+msgstr "رقم واتساب"
+
+msgid "WhatsApp Fallback Number"
+msgstr "رقم واتساب البديل"
+
+msgid "Button Position"
+msgstr "موضع الزر"
+
+msgid "Default Message Template"
+msgstr "قالب الرسالة الافتراضي"
+
+msgid "Enable Chat Widget"
+msgstr "تفعيل أداة المحادثة"
+
+msgid "Chat Popup Title"
+msgstr "عنوان نافذة المحادثة"
+
+msgid "Require Phone Number"
+msgstr "طلب رقم الهاتف"
+
+msgid "Auto Redirect to WhatsApp"
+msgstr "إعادة التوجيه تلقائياً إلى واتساب"
+
+msgid "Enable Product Button"
+msgstr "تفعيل زر المنتج"
+
+msgid "Enable Shop Button"
+msgstr "تفعيل زر المتجر"
+
+msgid "Enable Cart Button"
+msgstr "تفعيل زر السلة"
+
+msgid "Enable Floating Button"
+msgstr "تفعيل الزر العائم"
+
+msgid "Floating Button Text"
+msgstr "نص الزر العائم"
+
+msgid "Button Background Color"
+msgstr "لون خلفية الزر"
+
+msgid "Button Text Color"
+msgstr "لون نص الزر"
+
+msgid "Button Border Color"
+msgstr "لون حدود الزر"
+
+msgid "Button Hover Color"
+msgstr "لون التمرير على الزر"
+
+msgid "Button Border Radius"
+msgstr "نصف قطر حدود الزر"
+
+msgid "Product and Cart Button Icon"
+msgstr "أيقونة زر المنتج والسلة"
+
+msgid "Shop Button Icon"
+msgstr "أيقونة زر المتجر"
+
+msgid "Floating Button Icon"
+msgstr "أيقونة الزر العائم"
+
+msgid "Button Icon Size"
+msgstr "حجم أيقونة الزر"
+
+msgid "Chat Quote"
+msgstr "عرض سعر المحادثة"
+
+msgid "Chat Quote Settings"
+msgstr "إعدادات عرض سعر المحادثة"
+
+msgid "Configure your store-level WhatsApp number and global message template."
+msgstr "قم بتكوين رقم واتساب على مستوى المتجر وقالب الرسالة العام."
+
+msgid "The floating button opens an on-site chat widget before any WhatsApp redirect happens."
+msgstr "يفتح الزر العائم أداة محادثة على الموقع قبل أي إعادة توجيه إلى واتساب."
+
+msgid "These buttons link directly to WhatsApp on product, shop, and cart pages."
+msgstr "ترتبط هذه الأزرار مباشرة بواتساب في صفحات المنتج والمتجر والسلة."
+
+msgid "Enabled"
+msgstr "مفعّل"
+
+msgid "Upload Image"
+msgstr "رفع صورة"
+
+msgid "Remove"
+msgstr "إزالة"
+
+msgid "Available variables: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+msgstr "المتغيرات المتاحة: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+
+msgid "Before Add to Cart"
+msgstr "قبل الإضافة إلى السلة"
+
+msgid "After Add to Cart"
+msgstr "بعد الإضافة إلى السلة"
+
+msgid "Product Meta Area"
+msgstr "منطقة بيانات المنتج"
+
+msgid "Message sent."
+msgstr "تم إرسال الرسالة."
+
+msgid "Send Cart to WhatsApp"
+msgstr "إرسال السلة عبر واتساب"
+
+msgid "Hello,"
+msgstr "مرحباً،"
+
+msgid "I am interested in the following cart items:"
+msgstr "أنا مهتم بالعناصر التالية في السلة:"
+
+msgid "Please provide a quote."
+msgstr "يرجى تقديم عرض سعر."
+
+msgid "Chat Messages"
+msgstr "رسائل المحادثة"
+
+msgid "Analytics"
+msgstr "التحليلات"
+
+msgid "Chat Quote for WooCommerce Analytics"
+msgstr "تحليلات عرض سعر المحادثة لووكومرس"
+
+msgid "Total Clicks:"
+msgstr "إجمالي النقرات:"
+
+msgid "Unread Messages:"
+msgstr "الرسائل غير المقروءة:"
+
+msgid "Top 10 Products"
+msgstr "أفضل 10 منتجات"
+
+msgid "Last 7 Days Clicks"
+msgstr "نقرات آخر 7 أيام"
+
+msgid "Summary of product, shop, and cart button clicks."
+msgstr "ملخص نقرات أزرار المنتج والمتجر والسلة."
+
+msgid "Total Clicks"
+msgstr "إجمالي النقرات"
+
+msgid "Pending Messages"
+msgstr "الرسائل المعلقة"
+
+msgid "Message Details"
+msgstr "تفاصيل الرسالة"
+
+msgid "Name:"
+msgstr "الاسم:"
+
+msgid "Phone:"
+msgstr "الهاتف:"
+
+msgid "Status:"
+msgstr "الحالة:"
+
+msgid "Page URL:"
+msgstr "رابط الصفحة:"
+
+msgid "Message:"
+msgstr "الرسالة:"
+
+msgid "Search Messages"
+msgstr "البحث في الرسائل"
+
+msgid "Access denied."
+msgstr "تم رفض الوصول."
+
+msgid "Invalid nonce."
+msgstr "رمز أمان غير صالح."
+
+msgid "Invalid status."
+msgstr "حالة غير صالحة."
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Phone"
+msgstr "الهاتف"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "View"
+msgstr "عرض"
+
+msgid "Mark Read"
+msgstr "تحديد كمقروء"
+
+msgid "Mark Replied"
+msgstr "تحديد كمُرد عليه"
+
+msgid "Delete this message?"
+msgstr "حذف هذه الرسالة؟"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Chat Quote for WooCommerce requires WooCommerce to be installed and active."
+msgstr "يتطلب عرض سعر المحادثة لووكومرس أن يكون WooCommerce مثبتاً ومفعّلاً."

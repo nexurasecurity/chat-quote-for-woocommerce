@@ -1,0 +1,94 @@
+/* Pro: Checkout → WhatsApp switch */
+.cqfw-checkout-wa {
+	margin: 0 0 1.25rem;
+	padding: 14px 16px;
+	border: 1px solid #bbf7d0;
+	border-radius: 12px;
+	background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+	box-sizing: border-box;
+}
+
+.cqfw-checkout-wa__label {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	cursor: pointer;
+	margin: 0;
+}
+
+.cqfw-checkout-wa__switch {
+	position: relative;
+	display: inline-block;
+	width: 48px;
+	height: 28px;
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+.cqfw-checkout-wa__switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	position: absolute;
+}
+
+.cqfw-checkout-wa__slider {
+	position: absolute;
+	inset: 0;
+	background: #cbd5e1;
+	border-radius: 999px;
+	transition: background 0.2s ease;
+}
+
+.cqfw-checkout-wa__slider::before {
+	content: "";
+	position: absolute;
+	width: 22px;
+	height: 22px;
+	left: 3px;
+	top: 3px;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.25);
+	transition: transform 0.2s ease;
+}
+
+.cqfw-checkout-wa__switch input:checked + .cqfw-checkout-wa__slider {
+	background: #22c55e;
+}
+
+.cqfw-checkout-wa__switch input:checked + .cqfw-checkout-wa__slider::before {
+	transform: translateX(20px);
+}
+
+.cqfw-checkout-wa__switch input:focus-visible + .cqfw-checkout-wa__slider {
+	outline: 2px solid #16a34a;
+	outline-offset: 2px;
+}
+
+.cqfw-checkout-wa__text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.cqfw-checkout-wa__text strong {
+	font-size: 15px;
+	font-weight: 700;
+	color: #14532d;
+	line-height: 1.3;
+}
+
+.cqfw-checkout-wa__text small {
+	font-size: 13px;
+	color: #64748b;
+	line-height: 1.4;
+}
+
+#place_order.cqfw-place-order-wa,
+.wc-block-components-checkout-place-order-button.cqfw-place-order-wa {
+	background-color: #22c55e !important;
+	border-color: #16a34a !important;
+	color: #fff !important;
+}

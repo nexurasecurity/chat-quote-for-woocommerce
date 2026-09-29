@@ -1,0 +1,266 @@
+# Japanese translation for Chat Quote for WooCommerce.
+# Copyright (C) 2026 Prokash Sarker
+msgid ""
+msgstr ""
+"Project-Id-Version: Chat Quote for WooCommerce 1.1.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chat-quote-for-woocommerce\n"
+"POT-Creation-Date: 2026-07-22 04:56+0000\n"
+"PO-Revision-Date: 2026-07-22 04:56+0000\n"
+"Last-Translator: Prokash Sarker\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Antigravity IDE\n"
+"X-Domain: chat-quote-for-woocommerce\n"
+
+msgid "Chat on WhatsApp"
+msgstr "WhatsAppでチャット"
+
+msgid "Request Quote"
+msgstr "見積もりをリクエスト"
+
+msgid "Chat with us"
+msgstr "チャットする"
+
+msgid "We usually reply quickly."
+msgstr "通常、すぐに返信します。"
+
+msgid "Close chat"
+msgstr "チャットを閉じる"
+
+msgid "Your name"
+msgstr "お名前"
+
+msgid "Phone number"
+msgstr "電話番号"
+
+msgid "Message"
+msgstr "メッセージ"
+
+msgid "Type your message..."
+msgstr "メッセージを入力してください..."
+
+msgid "Send"
+msgstr "送信"
+
+msgid "Continue on Website Chat"
+msgstr "ウェブサイトのチャットを続ける"
+
+msgid "General Settings"
+msgstr "一般設定"
+
+msgid "Chat Widget"
+msgstr "チャットウィジェット"
+
+msgid "WhatsApp Buttons"
+msgstr "WhatsAppボタン"
+
+msgid "WhatsApp Number"
+msgstr "WhatsApp番号"
+
+msgid "WhatsApp Fallback Number"
+msgstr "WhatsApp予備番号"
+
+msgid "Button Position"
+msgstr "ボタンの位置"
+
+msgid "Default Message Template"
+msgstr "デフォルトのメッセージテンプレート"
+
+msgid "Enable Chat Widget"
+msgstr "チャットウィジェットを有効にする"
+
+msgid "Chat Popup Title"
+msgstr "チャットポップアップのタイトル"
+
+msgid "Require Phone Number"
+msgstr "電話番号を必須にする"
+
+msgid "Auto Redirect to WhatsApp"
+msgstr "WhatsAppへの自動リダイレクト"
+
+msgid "Enable Product Button"
+msgstr "製品ボタンを有効にする"
+
+msgid "Enable Shop Button"
+msgstr "ショップボタンを有効にする"
+
+msgid "Enable Cart Button"
+msgstr "カートボタンを有効にする"
+
+msgid "Enable Floating Button"
+msgstr "フローティングボタンを有効にする"
+
+msgid "Floating Button Text"
+msgstr "フローティングボタンのテキスト"
+
+msgid "Button Background Color"
+msgstr "ボタンの背景色"
+
+msgid "Button Text Color"
+msgstr "ボタンのテキストの色"
+
+msgid "Button Border Color"
+msgstr "ボタンの枠線の色"
+
+msgid "Button Hover Color"
+msgstr "ボタンのホバー時の色"
+
+msgid "Button Border Radius"
+msgstr "ボタンの枠線の丸み"
+
+msgid "Product and Cart Button Icon"
+msgstr "製品とカートのボタンアイコン"
+
+msgid "Shop Button Icon"
+msgstr "ショップのボタンアイコン"
+
+msgid "Floating Button Icon"
+msgstr "フローティングボタンのアイコン"
+
+msgid "Button Icon Size"
+msgstr "ボタンアイコンのサイズ"
+
+msgid "Chat Quote"
+msgstr "Chat Quote"
+
+msgid "Chat Quote Settings"
+msgstr "Chat Quoteの設定"
+
+msgid "Configure your store-level WhatsApp number and global message template."
+msgstr "ストアレベルのWhatsApp番号とグローバルメッセージテンプレートを設定します。"
+
+msgid "The floating button opens an on-site chat widget before any WhatsApp redirect happens."
+msgstr "フローティングボタンは、WhatsAppへのリダイレクトが行われる前に、オンサイトのチャットウィジェットを開きます。"
+
+msgid "These buttons link directly to WhatsApp on product, shop, and cart pages."
+msgstr "これらのボタンは、製品、ショップ、およびカートページで直接WhatsAppにリンクします。"
+
+msgid "Enabled"
+msgstr "有効"
+
+msgid "Upload Image"
+msgstr "画像をアップロード"
+
+msgid "Remove"
+msgstr "削除"
+
+msgid "Available variables: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+msgstr "利用可能な変数: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+
+msgid "Before Add to Cart"
+msgstr "カートに入れる前"
+
+msgid "After Add to Cart"
+msgstr "カートに入れた後"
+
+msgid "Product Meta Area"
+msgstr "製品メタエリア"
+
+msgid "Message sent."
+msgstr "メッセージが送信されました。"
+
+msgid "Send Cart to WhatsApp"
+msgstr "カートをWhatsAppに送信"
+
+msgid "Hello,"
+msgstr "こんにちは、"
+
+msgid "I am interested in the following cart items:"
+msgstr "以下のカートアイテムに興味があります:"
+
+msgid "Please provide a quote."
+msgstr "見積もりを提供してください。"
+
+msgid "Chat Messages"
+msgstr "チャットメッセージ"
+
+msgid "Analytics"
+msgstr "アナリティクス"
+
+msgid "Chat Quote for WooCommerce Analytics"
+msgstr "WooCommerceアナリティクスのためのChat Quote"
+
+msgid "Total Clicks:"
+msgstr "合計クリック数:"
+
+msgid "Unread Messages:"
+msgstr "未読メッセージ:"
+
+msgid "Top 10 Products"
+msgstr "トップ10の製品"
+
+msgid "Last 7 Days Clicks"
+msgstr "過去7日間のクリック数"
+
+msgid "Summary of product, shop, and cart button clicks."
+msgstr "製品、ショップ、およびカートボタンのクリック数の概要。"
+
+msgid "Total Clicks"
+msgstr "合計クリック数"
+
+msgid "Pending Messages"
+msgstr "保留中のメッセージ"
+
+msgid "Message Details"
+msgstr "メッセージの詳細"
+
+msgid "Name:"
+msgstr "名前:"
+
+msgid "Phone:"
+msgstr "電話:"
+
+msgid "Status:"
+msgstr "ステータス:"
+
+msgid "Page URL:"
+msgstr "ページURL:"
+
+msgid "Message:"
+msgstr "メッセージ:"
+
+msgid "Search Messages"
+msgstr "メッセージを検索"
+
+msgid "Access denied."
+msgstr "アクセスが拒否されました。"
+
+msgid "Invalid nonce."
+msgstr "無効なnonceです。"
+
+msgid "Invalid status."
+msgstr "無効なステータスです。"
+
+msgid "Name"
+msgstr "名前"
+
+msgid "Phone"
+msgstr "電話"
+
+msgid "Status"
+msgstr "ステータス"
+
+msgid "Date"
+msgstr "日付"
+
+msgid "View"
+msgstr "表示"
+
+msgid "Mark Read"
+msgstr "既読にする"
+
+msgid "Mark Replied"
+msgstr "返信済みにする"
+
+msgid "Delete this message?"
+msgstr "このメッセージを削除しますか？"
+
+msgid "Delete"
+msgstr "削除"
+
+msgid "Chat Quote for WooCommerce requires WooCommerce to be installed and active."
+msgstr "Chat Quote for WooCommerceには、WooCommerceがインストールされて有効になっている必要があります。"

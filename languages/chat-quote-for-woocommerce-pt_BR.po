@@ -1,0 +1,266 @@
+# Portuguese (Brazil) translation for Chat Quote for WooCommerce.
+# Copyright (C) 2026 Prokash Sarker
+msgid ""
+msgstr ""
+"Project-Id-Version: Chat Quote for WooCommerce 1.1.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chat-quote-for-woocommerce\n"
+"POT-Creation-Date: 2026-07-22 04:56+0000\n"
+"PO-Revision-Date: 2026-07-22 04:56+0000\n"
+"Last-Translator: Prokash Sarker\n"
+"Language-Team: Portuguese (Brazil)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Antigravity IDE\n"
+"X-Domain: chat-quote-for-woocommerce\n"
+
+msgid "Chat on WhatsApp"
+msgstr "Conversar no WhatsApp"
+
+msgid "Request Quote"
+msgstr "Solicitar orçamento"
+
+msgid "Chat with us"
+msgstr "Fale conosco"
+
+msgid "We usually reply quickly."
+msgstr "Geralmente respondemos rapidamente."
+
+msgid "Close chat"
+msgstr "Fechar chat"
+
+msgid "Your name"
+msgstr "Seu nome"
+
+msgid "Phone number"
+msgstr "Número de telefone"
+
+msgid "Message"
+msgstr "Mensagem"
+
+msgid "Type your message..."
+msgstr "Digite sua mensagem..."
+
+msgid "Send"
+msgstr "Enviar"
+
+msgid "Continue on Website Chat"
+msgstr "Continuar no chat do site"
+
+msgid "General Settings"
+msgstr "Configurações gerais"
+
+msgid "Chat Widget"
+msgstr "Widget de chat"
+
+msgid "WhatsApp Buttons"
+msgstr "Botões do WhatsApp"
+
+msgid "WhatsApp Number"
+msgstr "Número do WhatsApp"
+
+msgid "WhatsApp Fallback Number"
+msgstr "Número alternativo do WhatsApp"
+
+msgid "Button Position"
+msgstr "Posição do botão"
+
+msgid "Default Message Template"
+msgstr "Modelo de mensagem padrão"
+
+msgid "Enable Chat Widget"
+msgstr "Ativar widget de chat"
+
+msgid "Chat Popup Title"
+msgstr "Título do popup de chat"
+
+msgid "Require Phone Number"
+msgstr "Exigir número de telefone"
+
+msgid "Auto Redirect to WhatsApp"
+msgstr "Redirecionar automaticamente para o WhatsApp"
+
+msgid "Enable Product Button"
+msgstr "Ativar botão do produto"
+
+msgid "Enable Shop Button"
+msgstr "Ativar botão da loja"
+
+msgid "Enable Cart Button"
+msgstr "Ativar botão do carrinho"
+
+msgid "Enable Floating Button"
+msgstr "Ativar botão flutuante"
+
+msgid "Floating Button Text"
+msgstr "Texto do botão flutuante"
+
+msgid "Button Background Color"
+msgstr "Cor de fundo do botão"
+
+msgid "Button Text Color"
+msgstr "Cor do texto do botão"
+
+msgid "Button Border Color"
+msgstr "Cor da borda do botão"
+
+msgid "Button Hover Color"
+msgstr "Cor de hover do botão"
+
+msgid "Button Border Radius"
+msgstr "Raio da borda do botão"
+
+msgid "Product and Cart Button Icon"
+msgstr "Ícone do botão de produto e carrinho"
+
+msgid "Shop Button Icon"
+msgstr "Ícone do botão da loja"
+
+msgid "Floating Button Icon"
+msgstr "Ícone do botão flutuante"
+
+msgid "Button Icon Size"
+msgstr "Tamanho do ícone do botão"
+
+msgid "Chat Quote"
+msgstr "Chat Quote"
+
+msgid "Chat Quote Settings"
+msgstr "Configurações do Chat Quote"
+
+msgid "Configure your store-level WhatsApp number and global message template."
+msgstr "Configure seu número de WhatsApp da loja e o modelo de mensagem global."
+
+msgid "The floating button opens an on-site chat widget before any WhatsApp redirect happens."
+msgstr "O botão flutuante abre um widget de chat no site antes de qualquer redirecionamento para o WhatsApp."
+
+msgid "These buttons link directly to WhatsApp on product, shop, and cart pages."
+msgstr "Esses botões vinculam diretamente ao WhatsApp nas páginas de produto, loja e carrinho."
+
+msgid "Enabled"
+msgstr "Ativado"
+
+msgid "Upload Image"
+msgstr "Enviar imagem"
+
+msgid "Remove"
+msgstr "Remover"
+
+msgid "Available variables: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+msgstr "Variáveis disponíveis: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+
+msgid "Before Add to Cart"
+msgstr "Antes de Adicionar ao Carrinho"
+
+msgid "After Add to Cart"
+msgstr "Depois de Adicionar ao Carrinho"
+
+msgid "Product Meta Area"
+msgstr "Área de meta do produto"
+
+msgid "Message sent."
+msgstr "Mensagem enviada."
+
+msgid "Send Cart to WhatsApp"
+msgstr "Enviar carrinho pelo WhatsApp"
+
+msgid "Hello,"
+msgstr "Olá,"
+
+msgid "I am interested in the following cart items:"
+msgstr "Estou interessado nos seguintes itens do carrinho:"
+
+msgid "Please provide a quote."
+msgstr "Por favor, forneça um orçamento."
+
+msgid "Chat Messages"
+msgstr "Mensagens do chat"
+
+msgid "Analytics"
+msgstr "Análises"
+
+msgid "Chat Quote for WooCommerce Analytics"
+msgstr "Análises do Chat Quote para WooCommerce"
+
+msgid "Total Clicks:"
+msgstr "Cliques totais:"
+
+msgid "Unread Messages:"
+msgstr "Mensagens não lidas:"
+
+msgid "Top 10 Products"
+msgstr "Top 10 produtos"
+
+msgid "Last 7 Days Clicks"
+msgstr "Cliques dos últimos 7 dias"
+
+msgid "Summary of product, shop, and cart button clicks."
+msgstr "Resumo dos cliques nos botões de produto, loja e carrinho."
+
+msgid "Total Clicks"
+msgstr "Cliques totais"
+
+msgid "Pending Messages"
+msgstr "Mensagens pendentes"
+
+msgid "Message Details"
+msgstr "Detalhes da mensagem"
+
+msgid "Name:"
+msgstr "Nome:"
+
+msgid "Phone:"
+msgstr "Telefone:"
+
+msgid "Status:"
+msgstr "Status:"
+
+msgid "Page URL:"
+msgstr "URL da página:"
+
+msgid "Message:"
+msgstr "Mensagem:"
+
+msgid "Search Messages"
+msgstr "Pesquisar mensagens"
+
+msgid "Access denied."
+msgstr "Acesso negado."
+
+msgid "Invalid nonce."
+msgstr "Nonce inválido."
+
+msgid "Invalid status."
+msgstr "Status inválido."
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Phone"
+msgstr "Telefone"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "View"
+msgstr "Ver"
+
+msgid "Mark Read"
+msgstr "Marcar como lido"
+
+msgid "Mark Replied"
+msgstr "Marcar como respondido"
+
+msgid "Delete this message?"
+msgstr "Excluir esta mensagem?"
+
+msgid "Delete"
+msgstr "Excluir"
+
+msgid "Chat Quote for WooCommerce requires WooCommerce to be installed and active."
+msgstr "O Chat Quote para WooCommerce requer que o WooCommerce esteja instalado e ativo."

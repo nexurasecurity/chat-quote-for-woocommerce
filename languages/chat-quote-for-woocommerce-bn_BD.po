@@ -1,0 +1,276 @@
+# Bengali (Bangladesh) translation for Chat Quote for WooCommerce.
+# Copyright (C) 2026 Prokash Sarker
+# This file is distributed under the same license as the Chat Quote for WooCommerce plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Chat Quote for WooCommerce 1.1.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chat-quote-for-woocommerce\n"
+"POT-Creation-Date: 2026-07-22 04:56+0000\n"
+"PO-Revision-Date: 2026-07-22 04:56+0600\n"
+"Last-Translator: Prokash Sarker\n"
+"Language-Team: Bengali (Bangladesh)\n"
+"Language: bn_BD\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Antigravity IDE\n"
+"X-Domain: chat-quote-for-woocommerce\n"
+
+msgid "Chat Quote for WooCommerce"
+msgstr "চ্যাট কোট ফর উকমার্স"
+
+msgid "WooCommerce chat and WhatsApp quote buttons with a native on-site messenger widget."
+msgstr "WooCommerce চ্যাট এবং WhatsApp কোটেশন বাটন সহ একটি নেটিভ অন-সাইট মেসেঞ্জার উইজেট।"
+
+msgid "Prokash Sarker"
+msgstr "প্রকাশ সরকার"
+
+msgid "Chat on WhatsApp"
+msgstr "WhatsApp এ চ্যাট করুন"
+
+msgid "Request Quote"
+msgstr "কোটেশন অনুরোধ"
+
+msgid "Chat with us"
+msgstr "আমাদের সাথে চ্যাট করুন"
+
+msgid "We usually reply quickly."
+msgstr "আমরা সাধারণত দ্রুত উত্তর দিই।"
+
+msgid "Close chat"
+msgstr "চ্যাট বন্ধ করুন"
+
+msgid "Your name"
+msgstr "আপনার নাম"
+
+msgid "Phone number"
+msgstr "ফোন নম্বর"
+
+msgid "Message"
+msgstr "বার্তা"
+
+msgid "Type your message..."
+msgstr "আপনার বার্তা লিখুন..."
+
+msgid "Send"
+msgstr "পাঠান"
+
+msgid "Continue on Website Chat"
+msgstr "ওয়েবসাইট চ্যাটে চালিয়ে যান"
+
+msgid "General Settings"
+msgstr "সাধারণ সেটিংস"
+
+msgid "Chat Widget"
+msgstr "চ্যাট উইজেট"
+
+msgid "WhatsApp Buttons"
+msgstr "WhatsApp বাটন"
+
+msgid "WhatsApp Number"
+msgstr "WhatsApp নম্বর"
+
+msgid "WhatsApp Fallback Number"
+msgstr "WhatsApp ফলব্যাক নম্বর"
+
+msgid "Button Position"
+msgstr "বাটনের অবস্থান"
+
+msgid "Default Message Template"
+msgstr "ডিফল্ট বার্তা টেমপ্লেট"
+
+msgid "Enable Chat Widget"
+msgstr "চ্যাট উইজেট সক্রিয় করুন"
+
+msgid "Chat Popup Title"
+msgstr "চ্যাট পপআপ শিরোনাম"
+
+msgid "Require Phone Number"
+msgstr "ফোন নম্বর আবশ্যক"
+
+msgid "Auto Redirect to WhatsApp"
+msgstr "স্বয়ংক্রিয়ভাবে WhatsApp এ রিডাইরেক্ট"
+
+msgid "Enable Product Button"
+msgstr "প্রোডাক্ট বাটন সক্রিয় করুন"
+
+msgid "Enable Shop Button"
+msgstr "শপ বাটন সক্রিয় করুন"
+
+msgid "Enable Cart Button"
+msgstr "কার্ট বাটন সক্রিয় করুন"
+
+msgid "Enable Floating Button"
+msgstr "ফ্লোটিং বাটন সক্রিয় করুন"
+
+msgid "Floating Button Text"
+msgstr "ফ্লোটিং বাটন টেক্সট"
+
+msgid "Button Background Color"
+msgstr "বাটনের ব্যাকগ্রাউন্ড রঙ"
+
+msgid "Button Text Color"
+msgstr "বাটনের টেক্সট রঙ"
+
+msgid "Button Border Color"
+msgstr "বাটনের বর্ডার রঙ"
+
+msgid "Button Hover Color"
+msgstr "বাটনের হোভার রঙ"
+
+msgid "Button Border Radius"
+msgstr "বাটনের বর্ডার রেডিয়াস"
+
+msgid "Product and Cart Button Icon"
+msgstr "প্রোডাক্ট ও কার্ট বাটন আইকন"
+
+msgid "Shop Button Icon"
+msgstr "শপ বাটন আইকন"
+
+msgid "Floating Button Icon"
+msgstr "ফ্লোটিং বাটন আইকন"
+
+msgid "Button Icon Size"
+msgstr "বাটন আইকনের সাইজ"
+
+msgid "Chat Quote"
+msgstr "চ্যাট কোট"
+
+msgid "Chat Quote Settings"
+msgstr "চ্যাট কোট সেটিংস"
+
+msgid "Configure your store-level WhatsApp number and global message template."
+msgstr "আপনার স্টোর-লেভেল WhatsApp নম্বর এবং গ্লোবাল বার্তা টেমপ্লেট কনফিগার করুন।"
+
+msgid "The floating button opens an on-site chat widget before any WhatsApp redirect happens."
+msgstr "ফ্লোটিং বাটনটি WhatsApp রিডাইরেক্ট করার আগে একটি অন-সাইট চ্যাট উইজেট খোলে।"
+
+msgid "These buttons link directly to WhatsApp on product, shop, and cart pages."
+msgstr "এই বাটনগুলো প্রোডাক্ট, শপ এবং কার্ট পেজে সরাসরি WhatsApp এ লিংক করে।"
+
+msgid "Enabled"
+msgstr "সক্রিয়"
+
+msgid "Upload Image"
+msgstr "ছবি আপলোড করুন"
+
+msgid "Remove"
+msgstr "সরান"
+
+msgid "Available variables: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+msgstr "ব্যবহারযোগ্য ভেরিয়েবল: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+
+msgid "Before Add to Cart"
+msgstr "কার্টে যোগ করার আগে"
+
+msgid "After Add to Cart"
+msgstr "কার্টে যোগ করার পরে"
+
+msgid "Product Meta Area"
+msgstr "প্রোডাক্ট মেটা এরিয়া"
+
+msgid "Message sent."
+msgstr "বার্তা পাঠানো হয়েছে।"
+
+msgid "Send Cart to WhatsApp"
+msgstr "কার্ট WhatsApp এ পাঠান"
+
+msgid "Hello,"
+msgstr "হ্যালো,"
+
+msgid "I am interested in the following cart items:"
+msgstr "আমি নিম্নলিখিত কার্ট আইটেমগুলোতে আগ্রহী:"
+
+msgid "Please provide a quote."
+msgstr "অনুগ্রহ করে একটি কোটেশন দিন।"
+
+msgid "Chat Messages"
+msgstr "চ্যাট বার্তা"
+
+msgid "Analytics"
+msgstr "অ্যানালিটিক্স"
+
+msgid "Chat Quote for WooCommerce Analytics"
+msgstr "চ্যাট কোট ফর উকমার্স অ্যানালিটিক্স"
+
+msgid "Total Clicks:"
+msgstr "মোট ক্লিক:"
+
+msgid "Unread Messages:"
+msgstr "অপঠিত বার্তা:"
+
+msgid "Top 10 Products"
+msgstr "শীর্ষ ১০ প্রোডাক্ট"
+
+msgid "Last 7 Days Clicks"
+msgstr "গত ৭ দিনের ক্লিক"
+
+msgid "Summary of product, shop, and cart button clicks."
+msgstr "প্রোডাক্ট, শপ এবং কার্ট বাটন ক্লিকের সারসংক্ষেপ।"
+
+msgid "Total Clicks"
+msgstr "মোট ক্লিক"
+
+msgid "Pending Messages"
+msgstr "মুলতুবি বার্তা"
+
+msgid "Message Details"
+msgstr "বার্তার বিবরণ"
+
+msgid "Name:"
+msgstr "নাম:"
+
+msgid "Phone:"
+msgstr "ফোন:"
+
+msgid "Status:"
+msgstr "স্ট্যাটাস:"
+
+msgid "Page URL:"
+msgstr "পেজ URL:"
+
+msgid "Message:"
+msgstr "বার্তা:"
+
+msgid "Search Messages"
+msgstr "বার্তা খুঁজুন"
+
+msgid "Access denied."
+msgstr "অ্যাক্সেস অস্বীকৃত।"
+
+msgid "Invalid nonce."
+msgstr "অবৈধ নন্স।"
+
+msgid "Invalid status."
+msgstr "অবৈধ স্ট্যাটাস।"
+
+msgid "Name"
+msgstr "নাম"
+
+msgid "Phone"
+msgstr "ফোন"
+
+msgid "Status"
+msgstr "স্ট্যাটাস"
+
+msgid "Date"
+msgstr "তারিখ"
+
+msgid "View"
+msgstr "দেখুন"
+
+msgid "Mark Read"
+msgstr "পঠিত হিসেবে চিহ্নিত করুন"
+
+msgid "Mark Replied"
+msgstr "উত্তর দেওয়া হয়েছে বলে চিহ্নিত করুন"
+
+msgid "Delete this message?"
+msgstr "এই বার্তাটি মুছে ফেলবেন?"
+
+msgid "Delete"
+msgstr "মুছুন"
+
+msgid "Chat Quote for WooCommerce requires WooCommerce to be installed and active."
+msgstr "চ্যাট কোট ফর উকমার্স এর জন্য WooCommerce ইনস্টল এবং সক্রিয় থাকতে হবে।"

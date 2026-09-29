@@ -1,0 +1,315 @@
+/* ==========================================================================
+   Chat Quote Frontend Quote Form
+   ========================================================================== */
+
+:root {
+	--cqfw-primary: #075e54;
+	--cqfw-primary-dark: #054c44;
+	--cqfw-success: #25d366;
+	--cqfw-text: #1e293b;
+	--cqfw-text-muted: #64748b;
+	--cqfw-border: #e2e8f0;
+	--cqfw-bg: #f8fafc;
+	--cqfw-card: #ffffff;
+	--cqfw-error: #ef4444;
+	--cqfw-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.cqfw-quote-form-wrapper {
+	max-width: 600px;
+	margin: 0 auto;
+	font-family: var(--cqfw-font);
+	background: var(--cqfw-card);
+	border: 1px solid var(--cqfw-border);
+	border-radius: 12px;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	overflow: hidden;
+	position: relative;
+}
+
+/* Progress Bar */
+.cqfw-form-progress {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 24px 32px;
+	background: var(--cqfw-bg);
+	border-bottom: 1px solid var(--cqfw-border);
+}
+
+.cqfw-progress-step {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: var(--cqfw-card);
+	border: 2px solid var(--cqfw-border);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	color: var(--cqfw-text-muted);
+	position: relative;
+	z-index: 2;
+	transition: all 0.3s ease;
+}
+
+.cqfw-progress-step.is-active,
+.cqfw-progress-step.is-completed {
+	border-color: var(--cqfw-primary);
+	color: var(--cqfw-primary);
+}
+
+.cqfw-progress-step.is-active {
+	background: rgba(7, 94, 84, 0.1);
+}
+
+.cqfw-progress-step.is-completed {
+	background: var(--cqfw-primary);
+	color: #fff;
+}
+
+.cqfw-progress-line {
+	flex: 1;
+	height: 2px;
+	background: var(--cqfw-border);
+	margin: 0 12px;
+	position: relative;
+	z-index: 1;
+}
+
+.cqfw-progress-step.is-completed + .cqfw-progress-line {
+	background: var(--cqfw-primary);
+}
+
+/* Form Steps */
+.cqfw-quote-form {
+	padding: 32px;
+}
+
+.cqfw-form-step {
+	display: none;
+	animation: cqfwFadeIn 0.3s ease forwards;
+}
+
+.cqfw-form-step.is-active {
+	display: block;
+}
+
+@keyframes cqfwFadeIn {
+	from { opacity: 0; transform: translateY(10px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.cqfw-step-title {
+	margin: 0 0 8px 0;
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--cqfw-text);
+}
+
+.cqfw-step-desc {
+	margin: 0 0 24px 0;
+	color: var(--cqfw-text-muted);
+	font-size: 15px;
+}
+
+/* Form Fields */
+.cqfw-form-group {
+	margin-bottom: 20px;
+}
+
+.cqfw-form-row {
+	display: flex;
+	gap: 20px;
+}
+
+.cqfw-form-row .cqfw-form-group {
+	flex: 1;
+}
+
+.cqfw-form-group label {
+	display: block;
+	margin-bottom: 6px;
+	font-weight: 500;
+	font-size: 14px;
+	color: var(--cqfw-text);
+}
+
+.cqfw-quote-form input[type="text"],
+.cqfw-quote-form input[type="email"],
+.cqfw-quote-form input[type="tel"],
+.cqfw-quote-form input[type="number"],
+.cqfw-quote-form textarea {
+	width: 100%;
+	padding: 12px 16px;
+	border: 1px solid var(--cqfw-border);
+	border-radius: 8px;
+	font-size: 15px;
+	font-family: inherit;
+	color: var(--cqfw-text);
+	background: var(--cqfw-card);
+	transition: border-color 0.2s, box-shadow 0.2s;
+	box-sizing: border-box;
+}
+
+.cqfw-quote-form input:focus,
+.cqfw-quote-form textarea:focus {
+	outline: none;
+	border-color: var(--cqfw-primary);
+	box-shadow: 0 0 0 3px rgba(7, 94, 84, 0.1);
+}
+
+.cqfw-quote-form input.is-invalid,
+.cqfw-quote-form textarea.is-invalid {
+	border-color: var(--cqfw-error);
+}
+
+.cqfw-error-msg {
+	display: block;
+	color: var(--cqfw-error);
+	font-size: 13px;
+	margin-top: 4px;
+	min-height: 18px;
+}
+
+/* Actions */
+.cqfw-form-actions {
+	margin-top: 32px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.cqfw-form-actions-split {
+	justify-content: space-between;
+}
+
+.cqfw-btn {
+	padding: 12px 24px;
+	border-radius: 8px;
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+	border: none;
+	transition: all 0.2s;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
+.cqfw-btn-next,
+.cqfw-btn-submit {
+	background: var(--cqfw-primary);
+	color: #fff;
+}
+
+.cqfw-btn-next:hover,
+.cqfw-btn-submit:hover {
+	background: var(--cqfw-primary-dark);
+}
+
+.cqfw-btn-secondary {
+	background: var(--cqfw-bg);
+	color: var(--cqfw-text);
+	border: 1px solid var(--cqfw-border);
+}
+
+.cqfw-btn-secondary:hover {
+	background: #e2e8f0;
+}
+
+.cqfw-btn-submit:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+/* Spinner */
+.cqfw-spinner {
+	width: 18px;
+	height: 18px;
+	border: 2px solid rgba(255,255,255,0.3);
+	border-radius: 50%;
+	border-top-color: #fff;
+	animation: cqfwSpin 1s linear infinite;
+}
+
+@keyframes cqfwSpin {
+	to { transform: rotate(360deg); }
+}
+
+/* Summary Box */
+.cqfw-quote-summary {
+	background: var(--cqfw-bg);
+	border: 1px solid var(--cqfw-border);
+	border-radius: 8px;
+	padding: 20px;
+	font-size: 14px;
+}
+
+.cqfw-quote-summary p {
+	margin: 0 0 8px 0;
+}
+
+.cqfw-quote-summary strong {
+	color: var(--cqfw-text-muted);
+	display: inline-block;
+	width: 80px;
+}
+
+.cqfw-sum-msg-box {
+	background: var(--cqfw-card);
+	padding: 12px;
+	border-radius: 6px;
+	border: 1px solid var(--cqfw-border);
+	margin-top: 8px;
+	white-space: pre-wrap;
+	color: var(--cqfw-text);
+}
+
+/* Success Message */
+.cqfw-quote-success {
+	padding: 48px 32px;
+	text-align: center;
+}
+
+.cqfw-success-icon {
+	width: 64px;
+	height: 64px;
+	background: var(--cqfw-success);
+	color: #fff;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto 24px auto;
+}
+
+.cqfw-success-icon svg {
+	width: 32px;
+	height: 32px;
+}
+
+.cqfw-quote-success h3 {
+	margin: 0 0 12px 0;
+	font-size: 24px;
+	color: var(--cqfw-text);
+}
+
+.cqfw-quote-success p {
+	margin: 0;
+	color: var(--cqfw-text-muted);
+	font-size: 16px;
+}
+
+@media (max-width: 600px) {
+	.cqfw-form-row {
+		flex-direction: column;
+		gap: 0;
+	}
+	.cqfw-form-progress {
+		padding: 20px;
+	}
+	.cqfw-quote-form {
+		padding: 24px 20px;
+	}
+}

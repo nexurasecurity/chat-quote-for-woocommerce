@@ -1,0 +1,266 @@
+# French translation for Chat Quote for WooCommerce.
+# Copyright (C) 2026 Prokash Sarker
+msgid ""
+msgstr ""
+"Project-Id-Version: Chat Quote for WooCommerce 1.1.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chat-quote-for-woocommerce\n"
+"POT-Creation-Date: 2026-07-22 04:56+0000\n"
+"PO-Revision-Date: 2026-07-22 04:56+0000\n"
+"Last-Translator: Prokash Sarker\n"
+"Language-Team: French (France)\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Antigravity IDE\n"
+"X-Domain: chat-quote-for-woocommerce\n"
+
+msgid "Chat on WhatsApp"
+msgstr "Discuter sur WhatsApp"
+
+msgid "Request Quote"
+msgstr "Demander un devis"
+
+msgid "Chat with us"
+msgstr "Discutez avec nous"
+
+msgid "We usually reply quickly."
+msgstr "Nous répondons généralement rapidement."
+
+msgid "Close chat"
+msgstr "Fermer le chat"
+
+msgid "Your name"
+msgstr "Votre nom"
+
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Type your message..."
+msgstr "Écrivez votre message..."
+
+msgid "Send"
+msgstr "Envoyer"
+
+msgid "Continue on Website Chat"
+msgstr "Continuer sur le chat du site"
+
+msgid "General Settings"
+msgstr "Paramètres généraux"
+
+msgid "Chat Widget"
+msgstr "Widget de chat"
+
+msgid "WhatsApp Buttons"
+msgstr "Boutons WhatsApp"
+
+msgid "WhatsApp Number"
+msgstr "Numéro WhatsApp"
+
+msgid "WhatsApp Fallback Number"
+msgstr "Numéro WhatsApp de secours"
+
+msgid "Button Position"
+msgstr "Position du bouton"
+
+msgid "Default Message Template"
+msgstr "Modèle de message par défaut"
+
+msgid "Enable Chat Widget"
+msgstr "Activer le widget de chat"
+
+msgid "Chat Popup Title"
+msgstr "Titre de la fenêtre de chat"
+
+msgid "Require Phone Number"
+msgstr "Numéro de téléphone obligatoire"
+
+msgid "Auto Redirect to WhatsApp"
+msgstr "Redirection automatique vers WhatsApp"
+
+msgid "Enable Product Button"
+msgstr "Activer le bouton produit"
+
+msgid "Enable Shop Button"
+msgstr "Activer le bouton boutique"
+
+msgid "Enable Cart Button"
+msgstr "Activer le bouton panier"
+
+msgid "Enable Floating Button"
+msgstr "Activer le bouton flottant"
+
+msgid "Floating Button Text"
+msgstr "Texte du bouton flottant"
+
+msgid "Button Background Color"
+msgstr "Couleur de fond du bouton"
+
+msgid "Button Text Color"
+msgstr "Couleur du texte du bouton"
+
+msgid "Button Border Color"
+msgstr "Couleur de bordure du bouton"
+
+msgid "Button Hover Color"
+msgstr "Couleur de survol du bouton"
+
+msgid "Button Border Radius"
+msgstr "Rayon de bordure du bouton"
+
+msgid "Product and Cart Button Icon"
+msgstr "Icône du bouton produit et panier"
+
+msgid "Shop Button Icon"
+msgstr "Icône du bouton boutique"
+
+msgid "Floating Button Icon"
+msgstr "Icône du bouton flottant"
+
+msgid "Button Icon Size"
+msgstr "Taille de l'icône du bouton"
+
+msgid "Chat Quote"
+msgstr "Chat Quote"
+
+msgid "Chat Quote Settings"
+msgstr "Paramètres de Chat Quote"
+
+msgid "Configure your store-level WhatsApp number and global message template."
+msgstr "Configurez votre numéro WhatsApp au niveau de la boutique et le modèle de message global."
+
+msgid "The floating button opens an on-site chat widget before any WhatsApp redirect happens."
+msgstr "Le bouton flottant ouvre un widget de chat sur le site avant toute redirection vers WhatsApp."
+
+msgid "These buttons link directly to WhatsApp on product, shop, and cart pages."
+msgstr "Ces boutons renvoient directement vers WhatsApp sur les pages produit, boutique et panier."
+
+msgid "Enabled"
+msgstr "Activé"
+
+msgid "Upload Image"
+msgstr "Télécharger une image"
+
+msgid "Remove"
+msgstr "Supprimer"
+
+msgid "Available variables: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+msgstr "Variables disponibles : {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+
+msgid "Before Add to Cart"
+msgstr "Avant le bouton Ajouter au panier"
+
+msgid "After Add to Cart"
+msgstr "Après le bouton Ajouter au panier"
+
+msgid "Product Meta Area"
+msgstr "Zone méta du produit"
+
+msgid "Message sent."
+msgstr "Message envoyé."
+
+msgid "Send Cart to WhatsApp"
+msgstr "Envoyer le panier sur WhatsApp"
+
+msgid "Hello,"
+msgstr "Bonjour,"
+
+msgid "I am interested in the following cart items:"
+msgstr "Je suis intéressé par les articles suivants du panier :"
+
+msgid "Please provide a quote."
+msgstr "Veuillez fournir un devis."
+
+msgid "Chat Messages"
+msgstr "Messages du chat"
+
+msgid "Analytics"
+msgstr "Statistiques"
+
+msgid "Chat Quote for WooCommerce Analytics"
+msgstr "Statistiques de Chat Quote pour WooCommerce"
+
+msgid "Total Clicks:"
+msgstr "Clics totaux :"
+
+msgid "Unread Messages:"
+msgstr "Messages non lus :"
+
+msgid "Top 10 Products"
+msgstr "Top 10 des produits"
+
+msgid "Last 7 Days Clicks"
+msgstr "Clics des 7 derniers jours"
+
+msgid "Summary of product, shop, and cart button clicks."
+msgstr "Résumé des clics sur les boutons produit, boutique et panier."
+
+msgid "Total Clicks"
+msgstr "Clics totaux"
+
+msgid "Pending Messages"
+msgstr "Messages en attente"
+
+msgid "Message Details"
+msgstr "Détails du message"
+
+msgid "Name:"
+msgstr "Nom :"
+
+msgid "Phone:"
+msgstr "Téléphone :"
+
+msgid "Status:"
+msgstr "Statut :"
+
+msgid "Page URL:"
+msgstr "URL de la page :"
+
+msgid "Message:"
+msgstr "Message :"
+
+msgid "Search Messages"
+msgstr "Rechercher des messages"
+
+msgid "Access denied."
+msgstr "Accès refusé."
+
+msgid "Invalid nonce."
+msgstr "Nonce invalide."
+
+msgid "Invalid status."
+msgstr "Statut invalide."
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Phone"
+msgstr "Téléphone"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "View"
+msgstr "Voir"
+
+msgid "Mark Read"
+msgstr "Marquer comme lu"
+
+msgid "Mark Replied"
+msgstr "Marquer comme répondu"
+
+msgid "Delete this message?"
+msgstr "Supprimer ce message ?"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "Chat Quote for WooCommerce requires WooCommerce to be installed and active."
+msgstr "Chat Quote pour WooCommerce nécessite que WooCommerce soit installé et activé."

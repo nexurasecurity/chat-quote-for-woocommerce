@@ -1,0 +1,266 @@
+# Turkish translation for Chat Quote for WooCommerce.
+# Copyright (C) 2026 Prokash Sarker
+msgid ""
+msgstr ""
+"Project-Id-Version: Chat Quote for WooCommerce 1.1.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chat-quote-for-woocommerce\n"
+"POT-Creation-Date: 2026-07-22 04:56+0000\n"
+"PO-Revision-Date: 2026-07-22 04:56+0000\n"
+"Last-Translator: Prokash Sarker\n"
+"Language-Team: Turkish\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Antigravity IDE\n"
+"X-Domain: chat-quote-for-woocommerce\n"
+
+msgid "Chat on WhatsApp"
+msgstr "WhatsApp'ta sohbet et"
+
+msgid "Request Quote"
+msgstr "Teklif iste"
+
+msgid "Chat with us"
+msgstr "Bizimle sohbet edin"
+
+msgid "We usually reply quickly."
+msgstr "Genellikle hızlı yanıt veririz."
+
+msgid "Close chat"
+msgstr "Sohbeti kapat"
+
+msgid "Your name"
+msgstr "Adınız"
+
+msgid "Phone number"
+msgstr "Telefon numarası"
+
+msgid "Message"
+msgstr "Mesaj"
+
+msgid "Type your message..."
+msgstr "Mesajınızı yazın..."
+
+msgid "Send"
+msgstr "Gönder"
+
+msgid "Continue on Website Chat"
+msgstr "Web sitesi sohbetinde devam et"
+
+msgid "General Settings"
+msgstr "Genel ayarlar"
+
+msgid "Chat Widget"
+msgstr "Sohbet aracı"
+
+msgid "WhatsApp Buttons"
+msgstr "WhatsApp düğmeleri"
+
+msgid "WhatsApp Number"
+msgstr "WhatsApp numarası"
+
+msgid "WhatsApp Fallback Number"
+msgstr "Yedek WhatsApp numarası"
+
+msgid "Button Position"
+msgstr "Düğme konumu"
+
+msgid "Default Message Template"
+msgstr "Varsayılan mesaj şablonu"
+
+msgid "Enable Chat Widget"
+msgstr "Sohbet aracını etkinleştir"
+
+msgid "Chat Popup Title"
+msgstr "Sohbet açılır pencere başlığı"
+
+msgid "Require Phone Number"
+msgstr "Telefon numarası zorunlu"
+
+msgid "Auto Redirect to WhatsApp"
+msgstr "WhatsApp'a otomatik yönlendir"
+
+msgid "Enable Product Button"
+msgstr "Ürün düğmesini etkinleştir"
+
+msgid "Enable Shop Button"
+msgstr "Mağaza düğmesini etkinleştir"
+
+msgid "Enable Cart Button"
+msgstr "Sepet düğmesini etkinleştir"
+
+msgid "Enable Floating Button"
+msgstr "Yüzen düğmeyi etkinleştir"
+
+msgid "Floating Button Text"
+msgstr "Yüzen düğme metni"
+
+msgid "Button Background Color"
+msgstr "Düğme arka plan rengi"
+
+msgid "Button Text Color"
+msgstr "Düğme metin rengi"
+
+msgid "Button Border Color"
+msgstr "Düğme kenarlık rengi"
+
+msgid "Button Hover Color"
+msgstr "Düğme üzerine gelme rengi"
+
+msgid "Button Border Radius"
+msgstr "Düğme kenarlık yarıçapı"
+
+msgid "Product and Cart Button Icon"
+msgstr "Ürün ve sepet düğme simgesi"
+
+msgid "Shop Button Icon"
+msgstr "Mağaza düğme simgesi"
+
+msgid "Floating Button Icon"
+msgstr "Yüzen düğme simgesi"
+
+msgid "Button Icon Size"
+msgstr "Düğme simge boyutu"
+
+msgid "Chat Quote"
+msgstr "Chat Quote"
+
+msgid "Chat Quote Settings"
+msgstr "Chat Quote ayarları"
+
+msgid "Configure your store-level WhatsApp number and global message template."
+msgstr "Mağaza düzeyinde WhatsApp numaranızı ve genel mesaj şablonunu yapılandırın."
+
+msgid "The floating button opens an on-site chat widget before any WhatsApp redirect happens."
+msgstr "Yüzen düğme, WhatsApp'a yönlendirmeden önce site üzerinde bir sohbet aracı açar."
+
+msgid "These buttons link directly to WhatsApp on product, shop, and cart pages."
+msgstr "Bu düğmeler ürün, mağaza ve sepet sayfalarında doğrudan WhatsApp'a bağlanır."
+
+msgid "Enabled"
+msgstr "Etkin"
+
+msgid "Upload Image"
+msgstr "Resim yükle"
+
+msgid "Remove"
+msgstr "Kaldır"
+
+msgid "Available variables: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+msgstr "Kullanılabilir değişkenler: {product_name}, {product_price}, {product_sku}, {product_qty}, {product_url}"
+
+msgid "Before Add to Cart"
+msgstr "Sepete eklemeden önce"
+
+msgid "After Add to Cart"
+msgstr "Sepete ekledikten sonra"
+
+msgid "Product Meta Area"
+msgstr "Ürün meta alanı"
+
+msgid "Message sent."
+msgstr "Mesaj gönderildi."
+
+msgid "Send Cart to WhatsApp"
+msgstr "Sepeti WhatsApp'a gönder"
+
+msgid "Hello,"
+msgstr "Merhaba,"
+
+msgid "I am interested in the following cart items:"
+msgstr "Aşağıdaki sepet ürünleriyle ilgileniyorum:"
+
+msgid "Please provide a quote."
+msgstr "Lütfen bir teklif verin."
+
+msgid "Chat Messages"
+msgstr "Sohbet mesajları"
+
+msgid "Analytics"
+msgstr "Analitik"
+
+msgid "Chat Quote for WooCommerce Analytics"
+msgstr "WooCommerce için Chat Quote analitikleri"
+
+msgid "Total Clicks:"
+msgstr "Toplam tıklama:"
+
+msgid "Unread Messages:"
+msgstr "Okunmamış mesajlar:"
+
+msgid "Top 10 Products"
+msgstr "En iyi 10 ürün"
+
+msgid "Last 7 Days Clicks"
+msgstr "Son 7 günün tıklamaları"
+
+msgid "Summary of product, shop, and cart button clicks."
+msgstr "Ürün, mağaza ve sepet düğme tıklamalarının özeti."
+
+msgid "Total Clicks"
+msgstr "Toplam tıklama"
+
+msgid "Pending Messages"
+msgstr "Bekleyen mesajlar"
+
+msgid "Message Details"
+msgstr "Mesaj detayları"
+
+msgid "Name:"
+msgstr "Ad:"
+
+msgid "Phone:"
+msgstr "Telefon:"
+
+msgid "Status:"
+msgstr "Durum:"
+
+msgid "Page URL:"
+msgstr "Sayfa URL'si:"
+
+msgid "Message:"
+msgstr "Mesaj:"
+
+msgid "Search Messages"
+msgstr "Mesaj ara"
+
+msgid "Access denied."
+msgstr "Erişim reddedildi."
+
+msgid "Invalid nonce."
+msgstr "Geçersiz nonce."
+
+msgid "Invalid status."
+msgstr "Geçersiz durum."
+
+msgid "Name"
+msgstr "Ad"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Status"
+msgstr "Durum"
+
+msgid "Date"
+msgstr "Tarih"
+
+msgid "View"
+msgstr "Görüntüle"
+
+msgid "Mark Read"
+msgstr "Okundu olarak işaretle"
+
+msgid "Mark Replied"
+msgstr "Yanıtlandı olarak işaretle"
+
+msgid "Delete this message?"
+msgstr "Bu mesajı silmek istiyor musunuz?"
+
+msgid "Delete"
+msgstr "Sil"
+
+msgid "Chat Quote for WooCommerce requires WooCommerce to be installed and active."
+msgstr "WooCommerce için Chat Quote, WooCommerce'in kurulu ve etkin olmasını gerektirir."
