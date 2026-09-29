@@ -35,10 +35,9 @@ jobs:
   wordpress-coding-standards:
     name: WordPress Coding Standards (advisory)
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -55,4 +54,9 @@ jobs:
           "$composer_bin/phpcs" --config-set installed_paths "$composer_home/vendor/wp-coding-standards/wpcs,$composer_home/vendor/phpcsstandards/phpcsutils,$composer_home/vendor/phpcsstandards/phpcsextra"
 
       - name: Check coding standards
-        run: phpcs --standard=phpcs.xml.dist
+        run: |
+          if phpcs --standard=phpcs.xml.dist --report=summary; then
+            echo "WordPress Coding Standards passed."
+          else
+            echo "::warning title=WordPress Coding Standards::Existing violations are reported above; this check remains advisory until the baseline is addressed."
+          fi
