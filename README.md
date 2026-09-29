@@ -1,5 +1,12 @@
 # Chat Quote for WooCommerce
 
+[![Download on WordPress.org](https://img.shields.io/badge/Download-WordPress.org-21759B?style=for-the-badge&logo=wordpress&logoColor=white)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
+[![Requires WordPress](https://img.shields.io/badge/WordPress-6.1%2B-21759B?logo=wordpress&logoColor=white)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
+[![Requires PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4?logo=php&logoColor=white)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
+[![Version](https://img.shields.io/badge/Version-1.2.1-orange)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
+[![Tested up to](https://img.shields.io/badge/Tested%20up%20to-7.1-brightgreen)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
+[![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue)](https://www.gnu.org/licenses/gpl-2.0.html)
+
 Turn customer conversations into WooCommerce sales with WhatsApp buttons, quote requests, and an on-site live chat widget.
 
 Chat Quote for WooCommerce lets shoppers ask product questions, request a quote, share their cart, or contact your team on WhatsApp. Product and cart details can be added to message templates so your team has context before replying. The on-site inbox stores customer messages in WordPress and helps you track their status.
@@ -195,27 +202,4 @@ The product website provides these dashboard and feature screenshots:
 
 ## Changelog
 
-### 1.2.1
-
-- Improved setup with a country dial picker, save notifications, and checklist progress.
-- Improved live preview style synchronization and sticky save controls.
-- Enabled support chat without WooCommerce; WooCommerce features appear when WooCommerce is active.
-- Fixed Freemius pricing AJAX UTF-8 BOM and encoding issues.
-
-### 1.2.0
-
-- Organized Free widget controls and Pro-only panels.
-- Added the Go Pro Free-vs-Pro comparison page and free shop CTA style presets.
-- Added Free display rules, greetings, and basic Google Analytics, Pixel, and webhook tracking.
-- Added optional instant admin email alerts without WP-Cron.
-- Improved chat bubble settings, inbox fullscreen mode, and mobile chat behavior.
-- Separated premium code into the Freemius Pro package and improved settings handling, escaping, and hosting compatibility.
-
-### 1.1.1
-
-- Improved plugin description, tags, installation guide, and FAQ.
-- Updated tested WordPress version to 7.0.2.
-
-### 1.0.0
-
-- Initial release with WooCommerce WhatsApp buttons, floating live chat, inbox, analytics, button customization, message templates, and Multisite uninstall support.
+See [CHANGELOG.md](CHANGELOG.md) for release history.
