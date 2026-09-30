@@ -21,9 +21,10 @@ class CQFW_Analytics {
 		global $wpdb;
 
 		$tables = array(
-			'analytics' => $wpdb->prefix . 'cqfw_analytics',
-			'messages'  => $wpdb->prefix . 'cqfw_chat_messages',
-			'quotes'    => $wpdb->prefix . 'cqfw_quotes',
+			'analytics'  => $wpdb->prefix . 'cqfw_analytics',
+			'messages'   => $wpdb->prefix . 'cqfw_chat_messages',
+			'quotes'     => $wpdb->prefix . 'cqfw_quotes',
+			'inquiries'  => $wpdb->prefix . 'cqfw_inquiries',
 		);
 
 		return isset( $tables[ $type ] ) ? $tables[ $type ] : '';

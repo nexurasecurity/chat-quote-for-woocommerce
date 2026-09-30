@@ -3,7 +3,7 @@
 [![Download on WordPress.org](https://img.shields.io/badge/Download-WordPress.org-21759B?style=for-the-badge&logo=wordpress&logoColor=white)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
 [![Requires WordPress](https://img.shields.io/badge/WordPress-6.1%2B-21759B?logo=wordpress&logoColor=white)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
 [![Requires PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4?logo=php&logoColor=white)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
-[![Version](https://img.shields.io/badge/Version-1.2.1-orange)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
+[![Version](https://img.shields.io/badge/Version-1.2.2-orange)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
 [![Tested up to](https://img.shields.io/badge/Tested%20up%20to-7.1-brightgreen)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
 [![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue)](https://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -19,6 +19,7 @@ Chat Quote for WooCommerce lets shoppers ask product questions, request a quote,
 
 - Floating, AJAX-powered on-site chat widget with an inbox in WordPress.
 - WhatsApp buttons for product pages, shop/archive pages, and the cart.
+- Pro product inquiry button and form with variable-product details and an inquiry management screen.
 - Optional order and quote calls to action near WooCommerce product controls.
 - Product and cart context in WhatsApp messages: product name, price, SKU, quantity, and URL.
 - Standalone quote request form using `[cqfw_quote_form]`.
@@ -65,6 +66,10 @@ To associate a form submission with a product, pass its ID:
 
 Submissions are available under **Chat Quote → Quotes**. Pro adds custom quote fields and file attachments, plus tools to convert a quote into a WooCommerce order and export or print a PDF.
 
+### Product inquiries (Pro)
+
+Add a product inquiry button and form to product pages. The selected placement can be configured globally or per product, with options to hide Add to Cart for inquiry-only products. For variable products, inquiries can include the selected variation, its attributes, price, and image. Pro also provides customer confirmation emails, admin replies from the inquiry screen, searchable and filterable inquiry management, and CSV export.
+
 ### Admin tools
 
 The WordPress dashboard includes:
@@ -74,6 +79,7 @@ The WordPress dashboard includes:
 - **Buy Buttons:** Product, shop, cart, and floating calls to action.
 - **Inbox:** Search and manage customer messages, including fullscreen mode.
 - **Quotes:** Review quote requests and their status.
+- **Inquiries (Pro):** Review product questions, reply to customers, filter inquiries, and export them to CSV.
 - **Reports:** Click counts, popular products, and trends.
 - **Go Pro / Extra Pro tools:** Compare Free and Pro or access licensed tools.
 - **Help:** A short setup guide.
@@ -94,6 +100,7 @@ The Free plugin is not a time-limited trial; its features do not require a licen
 | Greeting templates | WhatsApp checkout and advanced conversion tracking, including Google Ads |
 | Basic Google Analytics, Facebook Pixel, and webhook click tracking | Quote form custom fields and file attachments |
 | Customer inbox, quote requests, reports, and optional email alerts | Convert quotes to WooCommerce orders; PDF/print and CSV export |
+| | Product inquiry form, variable-product details, inquiry management, and CSV export |
 | Product and shop button controls, including free shop layouts | Side-by-side shop buttons and custom layouts |
 
 Check **Chat Quote → Go Pro** in WordPress for the current feature comparison. Pro checkout is handled by Freemius.
@@ -181,6 +188,10 @@ Yes. It supports per-site settings and network uninstall.
 
 Yes. Open the plugin page and use its **Live Preview** to try the WordPress Playground blueprint.
 
+### What does Product Inquiry add?
+
+Pro adds a product inquiry button and form, optional inquiry-only product settings, variable-product details, customer confirmation emails, admin replies, and an inquiry list with filters and CSV export.
+
 ## Screenshots
 
 The product website provides these dashboard and feature screenshots:
@@ -195,7 +206,7 @@ The product website provides these dashboard and feature screenshots:
 
 ## Plugin information
 
-- **Version:** 1.2.1
+- **Version:** 1.2.2
 - **License:** GPL-2.0-or-later
 - **Author:** Nexura Security
 - **Website:** [nexurasecurity.com/chat-quote](https://nexurasecurity.com/chat-quote/)

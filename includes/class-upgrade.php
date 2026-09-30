@@ -97,6 +97,7 @@ class CQFW_Upgrade {
 
 			array( 'section' => __( 'WooCommerce', 'chat-quote-for-woocommerce' ) ),
 			array( 'name' => __( 'Single product & Shop buttons', 'chat-quote-for-woocommerce' ), 'free' => true, 'pro' => true ),
+			array( 'name' => __( 'Product Inquiry Button & Form Builder', 'chat-quote-for-woocommerce' ), 'free' => false, 'pro' => true ),
 			array( 'name' => __( 'Checkout → Place order via WhatsApp', 'chat-quote-for-woocommerce' ), 'free' => false, 'pro' => true ),
 			array( 'name' => __( 'Quotes → Order / PDF / Export', 'chat-quote-for-woocommerce' ), 'free' => false, 'pro' => true ),
 			array( 'name' => __( 'Share & Group chat links', 'chat-quote-for-woocommerce' ), 'free' => true, 'pro' => true ),

@@ -4,7 +4,7 @@
  * Plugin Name: Chat Quote for WooCommerce – Instant Chat & Order Quote Widget
  * Plugin URI: https://wordpress.org/plugins/chat-quote-for-woocommerce/
  * Description: WhatsApp chat and quote buttons for WordPress — floating support works without WooCommerce; shop buttons unlock when WooCommerce is active.
- * Version: 1.2.1
+ * Version: 1.2.2
  * Author: Prokash Sarker
  * Author URI: https://profiles.wordpress.org/prokashsarker2026/
  * Text Domain: chat-quote-for-woocommerce
@@ -153,7 +153,7 @@ function cqfw_get_admin_capability() {
     return ( cqfw_woocommerce_active() ? 'manage_woocommerce' : 'manage_options' );
 }
 
-define( 'CQFW_VERSION', '1.2.1' );
+define( 'CQFW_VERSION', '1.2.2' );
 define( 'CQFW_FILE', __FILE__ );
 define( 'CQFW_BASENAME', plugin_basename( __FILE__ ) );
 define( 'CQFW_PATH', plugin_dir_path( __FILE__ ) );

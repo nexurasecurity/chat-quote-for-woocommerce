@@ -23,8 +23,9 @@ class CQFW_Installer {
 
 		// Only bump version when core tables exist (ALTER may fail on locked shared hosts).
 		global $wpdb;
-		$messages = CQFW_Analytics::get_table( 'messages' );
-		$quotes   = CQFW_Analytics::get_table( 'quotes' );
+		$messages  = CQFW_Analytics::get_table( 'messages' );
+		$quotes    = CQFW_Analytics::get_table( 'quotes' );
+		$inquiries = CQFW_Analytics::get_table( 'inquiries' );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$ok_messages = $messages && $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $messages ) ) === $messages;
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -153,9 +154,31 @@ class CQFW_Installer {
 			KEY created_at (created_at)
 		) {$charset_collate};";
 
+		$inquiries_table = CQFW_Analytics::get_table( 'inquiries' );
+
+		$sql_inquiries = "CREATE TABLE {$inquiries_table} (
+			id            bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+			product_id    bigint(20) unsigned NULL DEFAULT NULL,
+			customer_name varchar(191) NOT NULL DEFAULT '',
+			email         varchar(191) NOT NULL DEFAULT '',
+			phone         varchar(50)  NOT NULL DEFAULT '',
+			inquiry_type  varchar(100) NOT NULL DEFAULT 'General Question',
+			question      longtext     NOT NULL,
+			custom_fields longtext     NULL,
+			status        varchar(20)  NOT NULL DEFAULT 'pending',
+			admin_reply   longtext     NOT NULL,
+			replied_at    datetime     NULL DEFAULT NULL,
+			created_at    datetime     NOT NULL,
+			PRIMARY KEY  (id),
+			KEY product_id (product_id),
+			KEY status (status),
+			KEY created_at (created_at)
+		) {$charset_collate};";
+
 		dbDelta( $sql_analytics );
 		dbDelta( $sql_messages );
 		dbDelta( $sql_quotes );
+		dbDelta( $sql_inquiries );
 	}
 
 	/**
@@ -165,6 +188,16 @@ class CQFW_Installer {
 	 */
 	public static function update_db_check() {
 		global $wpdb;
+		$inquiries_table = CQFW_Analytics::get_table( 'inquiries' );
+		if ( ! empty( $inquiries_table ) ) {
+			// Ensure custom_fields column exists (added in v1.3.0).
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
+			$row = $wpdb->get_results( $wpdb->prepare( "SHOW COLUMNS FROM `$inquiries_table` LIKE %s", 'custom_fields' ) );
+			if ( empty( $row ) ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
+				$wpdb->query( "ALTER TABLE `$inquiries_table` ADD `custom_fields` longtext NULL AFTER `question`" );
+			}
+		}
 		$messages_table = CQFW_Analytics::get_table( 'messages' );
 		$quotes_table   = CQFW_Analytics::get_table( 'quotes' );
 

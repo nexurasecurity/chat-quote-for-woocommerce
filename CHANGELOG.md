@@ -2,6 +2,14 @@
 
 All notable changes to Chat Quote for WooCommerce are documented here.
 
+## 1.2.2
+
+- Added Pro product inquiries with configurable single-product button placement and per-product controls, including inquiry-only mode.
+- Added variable-product inquiry details, including the selected variation, attributes, price, and image.
+- Added customer confirmation emails and direct admin replies that update inquiry status.
+- Added inquiry search, status tabs, filters, pagination, bulk actions, and CSV export.
+- Improved product button layout and admin setting labels.
+
 ## 1.2.1
 
 - Improved admin setup with a country dial picker for WhatsApp numbers, save notifications, and checklist progress.

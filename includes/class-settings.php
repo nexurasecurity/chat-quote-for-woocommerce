@@ -465,6 +465,20 @@ class CQFW_Settings {
 				'icon'  => 'dashicons-media-text',
 				'group' => 'manage',
 			),
+		);
+
+		if ( function_exists( 'cqfw_can_use_pro' ) && cqfw_can_use_pro() && $wc_active ) {
+			$pages['cqfw-inquiries'] = array(
+				'menu'  => __( 'Inquiries', 'chat-quote-for-woocommerce' ),
+				'title' => __( 'Product Inquiries', 'chat-quote-for-woocommerce' ),
+				'nav'   => __( 'Inquiries', 'chat-quote-for-woocommerce' ),
+				'desc'  => __( 'Customer inquiries from Product Inquiry button.', 'chat-quote-for-woocommerce' ),
+				'icon'  => 'dashicons-testimonial',
+				'group' => 'manage',
+			);
+		}
+
+		$pages += array(
 			'cqfw-analytics' => array(
 				'menu'  => __( 'Reports', 'chat-quote-for-woocommerce' ),
 				'title' => __( 'Reports', 'chat-quote-for-woocommerce' ),
@@ -526,7 +540,7 @@ class CQFW_Settings {
 		);
 
 		// Sidebar order follows get_admin_pages() so owners see a clear flow.
-		$menu_order = array( 'cqfw-settings', 'cqfw-widget', 'cqfw-buttons', 'cqfw-messages', 'cqfw-quotes', 'cqfw-analytics', 'cqfw-go-pro', 'cqfw-pro', 'cqfw-about' );
+		$menu_order = array( 'cqfw-settings', 'cqfw-widget', 'cqfw-buttons', 'cqfw-messages', 'cqfw-quotes', 'cqfw-inquiries', 'cqfw-analytics', 'cqfw-go-pro', 'cqfw-pro', 'cqfw-about' );
 		$callbacks  = array(
 			'cqfw-settings' => array( $this, 'render_general_page' ),
 			'cqfw-widget'   => array( $this, 'render_widget_page' ),
@@ -535,6 +549,10 @@ class CQFW_Settings {
 			'cqfw-pro'      => array( $this, 'render_pro_page' ),
 			'cqfw-go-pro'   => array( $this, 'render_go_pro_page' ),
 		);
+
+		if ( class_exists( 'CQFW_Pro_Product_Inquiry' ) ) {
+			$callbacks['cqfw-inquiries'] = array( 'CQFW_Pro_Product_Inquiry', 'render_admin_inquiries_page' );
+		}
 
 		foreach ( $menu_order as $slug ) {
 			if ( empty( $pages[ $slug ] ) || empty( $callbacks[ $slug ] ) ) {
@@ -579,6 +597,7 @@ class CQFW_Settings {
 			'cqfw-buttons',
 			'cqfw-messages',
 			'cqfw-quotes',
+			'cqfw-inquiries',
 			'cqfw-analytics',
 			'cqfw-go-pro',
 			'cqfw-pro',
@@ -2013,6 +2032,9 @@ return $sanitized;
 				if ( class_exists( 'CQFW_Pro_Checkout_WhatsApp' ) ) {
 					CQFW_Pro_Checkout_WhatsApp::render_admin_box();
 				}
+				if ( class_exists( 'CQFW_Pro_Product_Inquiry' ) ) {
+					CQFW_Pro_Product_Inquiry::render_admin_box();
+				}
 				?>
 
 				<footer class="cqfw-panel__foot">
@@ -2113,6 +2135,9 @@ return $sanitized;
 			update_option( 'cqfw_pro_modern_pill_input', isset( $_POST['cqfw_pro_modern_pill_input'] ) ? '1' : '0' );
 			if ( class_exists( 'CQFW_Pro_Checkout_WhatsApp' ) ) {
 				CQFW_Pro_Checkout_WhatsApp::save_admin_option();
+			}
+			if ( class_exists( 'CQFW_Pro_Product_Inquiry' ) ) {
+				CQFW_Pro_Product_Inquiry::save_admin_option();
 			}
 		}
 
