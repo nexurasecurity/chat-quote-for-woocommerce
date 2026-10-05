@@ -1,11 +1,23 @@
 # Chat Quote for WooCommerce
 
-[![Download on WordPress.org](https://img.shields.io/badge/Download-WordPress.org-21759B?style=for-the-badge&logo=wordpress&logoColor=white)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
-[![Requires WordPress](https://img.shields.io/badge/WordPress-6.1%2B-21759B?logo=wordpress&logoColor=white)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
-[![Requires PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4?logo=php&logoColor=white)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
-[![Version](https://img.shields.io/badge/Version-1.2.2-orange)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
-[![Tested up to](https://img.shields.io/badge/Tested%20up%20to-7.1-brightgreen)](https://wordpress.org/plugins/chat-quote-for-woocommerce/)
-[![License](https://img.shields.io/badge/License-GPL--2.0--or--later-blue)](https://www.gnu.org/licenses/gpl-2.0.html)
+<div align="center">
+  <a href="https://wordpress.org/plugins/chat-quote-for-woocommerce/">
+    <img src="https://img.shields.io/badge/WordPress.org-DOWNLOAD_FREE-0073aa?logo=wordpress&style=for-the-badge" alt="Download on WordPress.org">
+  </a>
+</div>
+
+<div align="center">
+  <img src="https://img.shields.io/badge/REQUIRES_WP-6.1+-0073aa?labelColor=555555&style=flat-square" alt="Requires WP 6.1+">
+  <img src="https://img.shields.io/badge/REQUIRES_PHP-7.4+-0073aa?labelColor=555555&style=flat-square" alt="Requires PHP 7.4+">
+  <img src="https://img.shields.io/badge/TESTED_UP_TO-7.1-73c713?labelColor=555555&style=flat-square" alt="Tested up to 7.1">
+  <img src="https://img.shields.io/badge/LICENSE-GPLV2-0073aa?labelColor=555555&style=flat-square" alt="License GPLv2">
+</div>
+<div align="center">
+  <a href="https://github.com/nexurasecurity/chat-quote-for-woocommerce/actions"><img src="https://img.shields.io/github/actions/workflow/status/nexurasecurity/chat-quote-for-woocommerce/php.yml?label=CI&logo=github&style=flat-square" alt="CI Status"></a>
+  <a href="https://github.com/nexurasecurity/chat-quote-for-woocommerce/stargazers"><img src="https://img.shields.io/github/stars/nexurasecurity/chat-quote-for-woocommerce?style=flat-square&logo=github" alt="GitHub Stars"></a>
+  <a href="https://github.com/nexurasecurity/chat-quote-for-woocommerce/network/members"><img src="https://img.shields.io/github/forks/nexurasecurity/chat-quote-for-woocommerce?style=flat-square&logo=github" alt="GitHub Forks"></a>
+  <a href="https://github.com/nexurasecurity/chat-quote-for-woocommerce/issues"><img src="https://img.shields.io/github/issues/nexurasecurity/chat-quote-for-woocommerce?style=flat-square&color=73c713" alt="GitHub Issues"></a>
+</div>
 
 Turn customer conversations into WooCommerce sales with WhatsApp buttons, quote requests, and an on-site live chat widget.
 
