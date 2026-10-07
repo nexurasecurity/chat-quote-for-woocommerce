@@ -382,27 +382,218 @@ body[class*="cqfw-"] #wpbody-content > .wrap:not(.cqfw-app) > h1.wp-heading-inli
 }
 
 /* Phone field */
+/* Phone field & Searchable Country Picker */
 .cqfw-phone-field {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 	gap: 8px;
-	max-width: 520px;
+	max-width: 580px;
 }
 
-.cqfw-phone-field__dial {
-	min-width: 168px;
-	max-width: 220px;
-	height: 36px !important;
-	border-radius: 8px !important;
-	border-color: #cbd5e1 !important;
+.cqfw-country-picker {
+	position: relative;
+	display: inline-block;
+}
+
+.cqfw-country-picker__native {
+	position: absolute !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+	width: 1px !important;
+	height: 1px !important;
+	margin: -1px !important;
+	padding: 0 !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	border: 0 !important;
+}
+
+.cqfw-country-picker__trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	height: 38px;
+	padding: 0 12px;
+	background: #ffffff;
+	border: 1px solid #cbd5e1;
+	border-radius: 8px;
+	font-size: 13px;
+	color: #1e293b;
+	cursor: pointer;
+	transition: all 0.15s ease;
+	max-width: 250px;
+	white-space: nowrap;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	user-select: none;
+}
+
+.cqfw-country-picker__trigger:hover {
+	border-color: #94a3b8;
+	background: #f8fafc;
+}
+
+.cqfw-country-picker__trigger:focus,
+.cqfw-country-picker.is-open .cqfw-country-picker__trigger {
+	outline: none;
+	border-color: #2563eb;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.cqfw-country-picker__flag {
+	font-size: 17px;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.cqfw-country-picker__dial {
+	font-weight: 600;
+	color: #0f172a;
+	font-size: 13px;
+	flex-shrink: 0;
+}
+
+.cqfw-country-picker__name {
+	color: #64748b;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 110px;
+	font-size: 12px;
+}
+
+.cqfw-country-picker__arrow {
+	font-size: 10px;
+	color: #94a3b8;
+	margin-left: 4px;
+	transition: transform 0.2s ease;
+	flex-shrink: 0;
+}
+
+.cqfw-country-picker.is-open .cqfw-country-picker__arrow {
+	transform: rotate(180deg);
+}
+
+.cqfw-country-picker__popover {
+	position: absolute;
+	top: calc(100% + 4px);
+	left: 0;
+	z-index: 10000;
+	width: 320px;
+	max-width: 90vw;
+	background: #ffffff;
+	border: 1px solid #cbd5e1;
+	border-radius: 10px;
+	box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.15), 0 4px 10px -2px rgba(15, 23, 42, 0.06);
+	overflow: hidden;
+	animation: cqfwDropIn 0.15s ease-out;
+}
+
+@keyframes cqfwDropIn {
+	from { opacity: 0; transform: translateY(-4px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.cqfw-country-picker__search-box {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 10px;
+	border-bottom: 1px solid #f1f5f9;
+	background: #f8fafc;
+}
+
+.cqfw-country-picker__search-icon {
+	font-size: 13px;
+	opacity: 0.6;
+	flex-shrink: 0;
+}
+
+.cqfw-country-picker__input {
+	width: 100% !important;
+	height: 32px !important;
+	padding: 4px 8px !important;
+	border: 1px solid #cbd5e1 !important;
+	border-radius: 6px !important;
+	font-size: 13px !important;
+	background: #ffffff !important;
+	box-sizing: border-box !important;
+	margin: 0 !important;
+}
+
+.cqfw-country-picker__input:focus {
+	outline: none !important;
+	border-color: #2563eb !important;
+	box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15) !important;
+}
+
+.cqfw-country-picker__options {
+	margin: 0 !important;
+	padding: 4px 0 !important;
+	list-style: none !important;
+	max-height: 250px;
+	overflow-y: auto;
+}
+
+.cqfw-country-picker__option {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 7px 12px;
+	font-size: 13px;
+	color: #334155;
+	cursor: pointer;
+	transition: background 0.1s ease;
+	margin: 0 !important;
+}
+
+.cqfw-country-picker__option:hover {
+	background: #f1f5f9;
+	color: #0f172a;
+}
+
+.cqfw-country-picker__option.is-selected {
+	background: #eff6ff;
+	color: #1d4ed8;
+	font-weight: 500;
+}
+
+.cqfw-country-picker__opt-flag {
+	font-size: 16px;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.cqfw-country-picker__opt-name {
+	flex: 1 1 auto;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cqfw-country-picker__opt-dial {
+	font-weight: 600;
+	color: #64748b;
+	font-size: 12px;
+	flex-shrink: 0;
+}
+
+.cqfw-country-picker__option.is-selected .cqfw-country-picker__opt-dial {
+	color: #2563eb;
+}
+
+.cqfw-country-picker__empty {
+	padding: 16px 12px;
+	text-align: center;
+	font-size: 13px;
+	color: #94a3b8;
 }
 
 .cqfw-phone-field__local {
 	flex: 1 1 180px;
 	min-width: 160px;
 	max-width: 280px !important;
-	height: 36px !important;
+	height: 38px !important;
 	border-radius: 8px !important;
 }
 

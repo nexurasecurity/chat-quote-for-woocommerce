@@ -1667,35 +1667,37 @@ return $sanitized;
 	 * @return array<int,array{iso:string,name:string,dial:string,flag:string}>
 	 */
 	public static function get_dial_countries() {
-		$countries = array(
-			array( 'iso' => 'BD', 'name' => 'Bangladesh', 'dial' => '880', 'flag' => '🇧🇩' ),
-			array( 'iso' => 'IN', 'name' => 'India', 'dial' => '91', 'flag' => '🇮🇳' ),
-			array( 'iso' => 'US', 'name' => 'United States', 'dial' => '1', 'flag' => '🇺🇸' ),
-			array( 'iso' => 'GB', 'name' => 'United Kingdom', 'dial' => '44', 'flag' => '🇬🇧' ),
-			array( 'iso' => 'AE', 'name' => 'United Arab Emirates', 'dial' => '971', 'flag' => '🇦🇪' ),
-			array( 'iso' => 'SA', 'name' => 'Saudi Arabia', 'dial' => '966', 'flag' => '🇸🇦' ),
-			array( 'iso' => 'PK', 'name' => 'Pakistan', 'dial' => '92', 'flag' => '🇵🇰' ),
-			array( 'iso' => 'MY', 'name' => 'Malaysia', 'dial' => '60', 'flag' => '🇲🇾' ),
-			array( 'iso' => 'SG', 'name' => 'Singapore', 'dial' => '65', 'flag' => '🇸🇬' ),
-			array( 'iso' => 'ID', 'name' => 'Indonesia', 'dial' => '62', 'flag' => '🇮🇩' ),
-			array( 'iso' => 'AU', 'name' => 'Australia', 'dial' => '61', 'flag' => '🇦🇺' ),
-			array( 'iso' => 'CA', 'name' => 'Canada', 'dial' => '1', 'flag' => '🇨🇦' ),
-			array( 'iso' => 'DE', 'name' => 'Germany', 'dial' => '49', 'flag' => '🇩🇪' ),
-			array( 'iso' => 'FR', 'name' => 'France', 'dial' => '33', 'flag' => '🇫🇷' ),
-			array( 'iso' => 'NL', 'name' => 'Netherlands', 'dial' => '31', 'flag' => '🇳🇱' ),
-			array( 'iso' => 'TR', 'name' => 'Turkey', 'dial' => '90', 'flag' => '🇹🇷' ),
-			array( 'iso' => 'NG', 'name' => 'Nigeria', 'dial' => '234', 'flag' => '🇳🇬' ),
-			array( 'iso' => 'ZA', 'name' => 'South Africa', 'dial' => '27', 'flag' => '🇿🇦' ),
-			array( 'iso' => 'BR', 'name' => 'Brazil', 'dial' => '55', 'flag' => '🇧🇷' ),
-			array( 'iso' => 'PH', 'name' => 'Philippines', 'dial' => '63', 'flag' => '🇵🇭' ),
-		);
+		static $countries = null;
+
+		if ( null !== $countries ) {
+			return $countries;
+		}
+
+		$file = dirname( __FILE__ ) . '/country-data.php';
+		if ( file_exists( $file ) ) {
+			$list = include $file;
+		} else {
+			$list = array();
+		}
+
+		if ( ! is_array( $list ) || empty( $list ) ) {
+			$list = array(
+				array( 'iso' => 'CM', 'name' => 'Cameroon', 'dial' => '237', 'flag' => '🇨🇲' ),
+				array( 'iso' => 'BD', 'name' => 'Bangladesh', 'dial' => '880', 'flag' => '🇧🇩' ),
+				array( 'iso' => 'IN', 'name' => 'India', 'dial' => '91', 'flag' => '🇮🇳' ),
+				array( 'iso' => 'US', 'name' => 'United States', 'dial' => '1', 'flag' => '🇺🇸' ),
+				array( 'iso' => 'GB', 'name' => 'United Kingdom', 'dial' => '44', 'flag' => '🇬🇧' ),
+			);
+		}
 
 		/**
 		 * Filter CQFW dial-code country list.
 		 *
-		 * @param array $countries Countries.
+		 * @param array $list Countries.
 		 */
-		return apply_filters( 'cqfw_dial_countries', $countries );
+		$countries = (array) apply_filters( 'cqfw_dial_countries', $list );
+
+		return $countries;
 	}
 
 	/**
@@ -1706,21 +1708,69 @@ return $sanitized;
 	 */
 	public static function split_phone_number( $digits ) {
 		$digits = preg_replace( '/\D+/', '', (string) $digits );
-		$best   = array(
-			'dial'     => '880',
+		$default_iso  = 'BD';
+		$default_dial = '880';
+
+		if ( function_exists( 'get_option' ) ) {
+			$wc_default = (string) get_option( 'woocommerce_default_country', '' );
+			if ( $wc_default ) {
+				$parts   = explode( ':', $wc_default );
+				$base_cc = strtoupper( trim( $parts[0] ) );
+				if ( ! empty( $base_cc ) ) {
+					$default_iso = $base_cc;
+				}
+			}
+		}
+
+		$countries = self::get_dial_countries();
+
+		foreach ( $countries as $c ) {
+			if ( $c['iso'] === $default_iso ) {
+				$default_dial = $c['dial'];
+				break;
+			}
+		}
+
+		$best = array(
+			'dial'     => $default_dial,
 			'national' => $digits,
-			'iso'      => 'BD',
+			'iso'      => $default_iso,
 		);
 
 		if ( '' === $digits ) {
 			return $best;
 		}
 
-		$countries = self::get_dial_countries();
+		// Prefer store default country if its dial matches the digits
+		if ( ! empty( $best['dial'] ) && 0 === strpos( $digits, $best['dial'] ) && strlen( $digits ) > strlen( $best['dial'] ) ) {
+			return array(
+				'dial'     => $best['dial'],
+				'national' => substr( $digits, strlen( $best['dial'] ) ),
+				'iso'      => $best['iso'],
+			);
+		}
+
 		usort(
 			$countries,
-			static function ( $a, $b ) {
-				return strlen( $b['dial'] ) - strlen( $a['dial'] );
+			static function ( $a, $b ) use ( $default_iso ) {
+				$diff = strlen( $b['dial'] ) - strlen( $a['dial'] );
+				if ( 0 !== $diff ) {
+					return $diff;
+				}
+				if ( $a['iso'] === $default_iso ) {
+					return -1;
+				}
+				if ( $b['iso'] === $default_iso ) {
+					return 1;
+				}
+				// Default US over other +1 countries if neither is store default
+				if ( 'US' === $a['iso'] ) {
+					return -1;
+				}
+				if ( 'US' === $b['iso'] ) {
+					return 1;
+				}
+				return 0;
 			}
 		);
 
@@ -1770,26 +1820,90 @@ return $sanitized;
 	 * @return void
 	 */
 	public function render_phone_field( $args ) {
-		$key      = $args['key'];
-		$setting  = (string) self::get_setting( $key, '' );
-		$parts    = self::split_phone_number( $setting );
+		$key       = $args['key'];
+		$setting   = (string) self::get_setting( $key, '' );
+		$parts     = self::split_phone_number( $setting );
 		$countries = self::get_dial_countries();
-		$uid      = 'cqfw-phone-' . sanitize_html_class( $key );
+		$uid       = 'cqfw-phone-' . sanitize_html_class( $key );
+
+		$active_flag = '🇧🇩';
+		$active_dial = '880';
+		$active_name = 'Bangladesh';
+
+		foreach ( $countries as $country ) {
+			$is_match = ( $parts['iso'] . '-' . $parts['dial'] === $country['iso'] . '-' . $country['dial'] ) || ( empty( $parts['iso'] ) && $parts['dial'] === $country['dial'] );
+			if ( $is_match ) {
+				$active_flag = $country['flag'];
+				$active_dial = $country['dial'];
+				$active_name = $country['name'];
+				break;
+			}
+		}
 		?>
 		<div class="cqfw-phone-field" data-cqfw-phone="<?php echo esc_attr( $key ); ?>">
 			<input type="hidden" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( self::OPTION_NAME . '[' . $key . ']' ); ?>" value="<?php echo esc_attr( preg_replace( '/\D+/', '', $setting ) ); ?>" data-cqfw-phone-full />
 			<label class="cqfw-phone-field__country screen-reader-text" for="<?php echo esc_attr( $uid ); ?>-dial"><?php esc_html_e( 'Country code', 'chat-quote-for-woocommerce' ); ?></label>
-			<select id="<?php echo esc_attr( $uid ); ?>-dial" class="cqfw-phone-field__dial" data-cqfw-phone-dial>
-				<?php foreach ( $countries as $country ) : ?>
-					<option
-						value="<?php echo esc_attr( $country['dial'] ); ?>"
-						data-iso="<?php echo esc_attr( $country['iso'] ); ?>"
-						<?php selected( $parts['iso'] . '-' . $parts['dial'], $country['iso'] . '-' . $country['dial'] ); ?>
-					>
-						<?php echo esc_html( $country['flag'] . ' +' . $country['dial'] . ' ' . $country['name'] ); ?>
-					</option>
-				<?php endforeach; ?>
-			</select>
+
+			<div class="cqfw-country-picker" data-cqfw-country-picker>
+				<select id="<?php echo esc_attr( $uid ); ?>-dial" class="cqfw-phone-field__dial cqfw-country-picker__native" data-cqfw-phone-dial tabindex="-1" aria-hidden="true">
+					<?php foreach ( $countries as $country ) : 
+						$is_selected = ( $parts['iso'] . '-' . $parts['dial'] === $country['iso'] . '-' . $country['dial'] ) || ( empty( $parts['iso'] ) && $parts['dial'] === $country['dial'] );
+					?>
+						<option
+							value="<?php echo esc_attr( $country['dial'] ); ?>"
+							data-iso="<?php echo esc_attr( $country['iso'] ); ?>"
+							data-flag="<?php echo esc_attr( $country['flag'] ); ?>"
+							data-name="<?php echo esc_attr( $country['name'] ); ?>"
+							<?php selected( $is_selected ); ?>
+						>
+							<?php echo esc_html( $country['flag'] . ' +' . $country['dial'] . ' ' . $country['name'] ); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+
+				<button type="button" class="cqfw-country-picker__trigger" data-cqfw-country-trigger aria-haspopup="listbox" aria-expanded="false" title="<?php esc_attr_e( 'Select country', 'chat-quote-for-woocommerce' ); ?>">
+					<span class="cqfw-country-picker__flag" data-cqfw-current-flag><?php echo esc_html( $active_flag ); ?></span>
+					<span class="cqfw-country-picker__dial" data-cqfw-current-dial>+<?php echo esc_html( $active_dial ); ?></span>
+					<span class="cqfw-country-picker__name" data-cqfw-current-name><?php echo esc_html( $active_name ); ?></span>
+					<span class="cqfw-country-picker__arrow">▾</span>
+				</button>
+
+				<div class="cqfw-country-picker__popover" data-cqfw-country-popover style="display:none;">
+					<div class="cqfw-country-picker__search-box">
+						<span class="cqfw-country-picker__search-icon" aria-hidden="true">🔍</span>
+						<input
+							type="text"
+							class="cqfw-country-picker__input"
+							placeholder="<?php esc_attr_e( 'Search country or code (e.g. Cameroon, 237)...', 'chat-quote-for-woocommerce' ); ?>"
+							data-cqfw-country-search
+							autocomplete="off"
+						/>
+					</div>
+					<ul class="cqfw-country-picker__options" data-cqfw-country-options role="listbox">
+						<?php foreach ( $countries as $country ) : 
+							$is_selected = ( $parts['iso'] . '-' . $parts['dial'] === $country['iso'] . '-' . $country['dial'] ) || ( empty( $parts['iso'] ) && $parts['dial'] === $country['dial'] );
+						?>
+							<li
+								class="cqfw-country-picker__option<?php echo $is_selected ? ' is-selected' : ''; ?>"
+								data-dial="<?php echo esc_attr( $country['dial'] ); ?>"
+								data-iso="<?php echo esc_attr( $country['iso'] ); ?>"
+								data-name="<?php echo esc_attr( $country['name'] ); ?>"
+								data-flag="<?php echo esc_attr( $country['flag'] ); ?>"
+								role="option"
+								aria-selected="<?php echo $is_selected ? 'true' : 'false'; ?>"
+							>
+								<span class="cqfw-country-picker__opt-flag"><?php echo esc_html( $country['flag'] ); ?></span>
+								<span class="cqfw-country-picker__opt-name"><?php echo esc_html( $country['name'] ); ?></span>
+								<span class="cqfw-country-picker__opt-dial">+<?php echo esc_html( $country['dial'] ); ?></span>
+							</li>
+						<?php endforeach; ?>
+						<li class="cqfw-country-picker__empty" data-cqfw-country-empty style="display:none;">
+							<?php esc_html_e( 'No countries match your search', 'chat-quote-for-woocommerce' ); ?>
+						</li>
+					</ul>
+				</div>
+			</div>
+
 			<input
 				type="tel"
 				inputmode="numeric"
@@ -1797,11 +1911,11 @@ return $sanitized;
 				class="cqfw-phone-field__local regular-text"
 				id="<?php echo esc_attr( $uid ); ?>-local"
 				value="<?php echo esc_attr( $parts['national'] ); ?>"
-				placeholder="<?php echo esc_attr( '880' === $parts['dial'] ? '1732593040' : 'Phone number' ); ?>"
+				placeholder="<?php echo esc_attr( 'Phone number' ); ?>"
 				data-cqfw-phone-local
 			/>
 			<p class="description cqfw-phone-field__hint">
-				<?php esc_html_e( 'Saved as international digits for WhatsApp (example: 8801732593040). Leading 0 is removed automatically.', 'chat-quote-for-woocommerce' ); ?>
+				<?php esc_html_e( 'Saved as international digits for WhatsApp (e.g. 237651234567 or 8801732593040). Leading 0 is removed automatically.', 'chat-quote-for-woocommerce' ); ?>
 			</p>
 		</div>
 		<?php

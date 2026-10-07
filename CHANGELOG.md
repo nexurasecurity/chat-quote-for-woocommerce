@@ -2,6 +2,13 @@
 
 All notable changes to Chat Quote for WooCommerce are documented here.
 
+## 1.2.3
+
+- Added complete global country dial code list covering 245 countries and territories, including Cameroon (+237) and all international regions.
+- Added interactive real-time search for the Country Dial Picker — search by country name, dial code, or ISO code with instant filtering and keyboard navigation (Enter/Esc).
+- Improved smart phone number synchronization with automatic country detection from pasted international numbers and dial prefix deduplication.
+- Improved Product Inquiry modal telephone field to support all 245 countries and regions.
+
 ## 1.2.2
 
 - Added Pro product inquiries with configurable single-product button placement and per-product controls, including inquiry-only mode.

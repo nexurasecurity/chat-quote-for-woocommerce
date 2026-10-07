@@ -218,11 +218,18 @@ The product website provides these dashboard and feature screenshots:
 
 ## Plugin information
 
-- **Version:** 1.2.2
+- **Version:** 1.2.3
 - **License:** GPL-2.0-or-later
 - **Author:** Nexura Security
 - **Website:** [nexurasecurity.com/chat-quote](https://nexurasecurity.com/chat-quote/)
 
 ## Changelog
 
-See [CHANGELOG.md](CHANGELOG.md) for release history.
+### 1.2.3
+
+- Added complete global country dial code list covering 245 countries and territories, including Cameroon (+237) and all international regions.
+- Added interactive real-time search for the Country Dial Picker — search by country name, dial code, or ISO code with instant filtering and keyboard navigation (Enter/Esc).
+- Improved smart phone number synchronization with automatic country detection from pasted international numbers and dial prefix deduplication.
+- Improved Product Inquiry modal telephone field to support all 245 countries and regions.
+
+See [CHANGELOG.md](CHANGELOG.md) for full release history.

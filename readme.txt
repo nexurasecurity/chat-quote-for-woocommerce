@@ -4,7 +4,7 @@ Tags: whatsapp chat, product inquiry, request quote, live chat, woocommerce
 Requires at least: 6.1
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -178,6 +178,12 @@ Yes. Use **Live Preview** on the plugin page (WordPress Playground).
 
 == Changelog ==
 
+= 1.2.3 =
+* Added: Complete global country dial code list (245 countries and territories) including Cameroon (+237) and all international regions
+* Added: Interactive real-time search for Country Dial Picker — search by country name, dial code, or ISO code with instant filtering and keyboard navigation (Enter/Esc)
+* Improved: Smart phone number synchronization — automatic country detection from pasted international numbers (+...) and dial prefix deduplication
+* Improved: Product Inquiry modal telephone field updated to support all 245 countries and regions
+
 = 1.2.2 =
 * Added: Variable product auto-detection for Product Inquiries — captures selected variation ID, attributes (e.g. Size, Color), variation price, and gallery image
 * Added: Automated customer confirmation email on inquiry submission with full product & message summary
@@ -236,6 +242,9 @@ Yes. Use **Live Preview** on the plugin page (WordPress Playground).
 * Added clean uninstall with multisite support
 
 == Upgrade Notice ==
+
+= 1.2.3 =
+Full global country dial codes (245 countries/territories) including Cameroon (+237), real-time searchable country picker, and smart phone prefix deduplication. Recommended update for all users.
 
 = 1.2.2 =
 Enhanced Product Inquiries with variable product detection, customer confirmation emails, direct admin-to-customer email replies, flexible button positions, and advanced filtering. Recommended update.

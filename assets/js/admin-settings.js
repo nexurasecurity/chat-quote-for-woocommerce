@@ -217,6 +217,18 @@
 		return String( value || '' ).replace( /\D+/g, '' );
 	}
 
+	function updateCountryTrigger( picker, flag, dial, name ) {
+		if ( ! picker ) {
+			return;
+		}
+		var flagEl = picker.querySelector( '[data-cqfw-current-flag]' );
+		var dialEl = picker.querySelector( '[data-cqfw-current-dial]' );
+		var nameEl = picker.querySelector( '[data-cqfw-current-name]' );
+		if ( flagEl && flag ) flagEl.textContent = flag;
+		if ( dialEl && dial ) dialEl.textContent = '+' + String( dial ).replace( /^\+/, '' );
+		if ( nameEl && name ) nameEl.textContent = name;
+	}
+
 	function syncPhoneField( wrap ) {
 		if ( ! wrap ) {
 			return;
@@ -227,8 +239,42 @@
 		if ( ! dial || ! local || ! full ) {
 			return;
 		}
+
+		var rawLocal = String( local.value || '' ).trim();
 		var dialDigits = digitsOnly( dial.value );
-		var national = digitsOnly( local.value ).replace( /^0+/, '' );
+
+		// Auto-detect country if pasted with leading '+'
+		if ( rawLocal.indexOf( '+' ) === 0 ) {
+			var pastedDigits = digitsOnly( rawLocal );
+			var options = Array.prototype.slice.call( dial.options );
+			// Sort options by dial length descending to match longest dial prefix first
+			options.sort( function ( a, b ) {
+				return digitsOnly( b.value ).length - digitsOnly( a.value ).length;
+			} );
+			for ( var i = 0; i < options.length; i++ ) {
+				var optDial = digitsOnly( options[ i ].value );
+				if ( optDial && pastedDigits.indexOf( optDial ) === 0 && pastedDigits.length > optDial.length ) {
+					dial.value = options[ i ].value;
+					dialDigits = optDial;
+					rawLocal = pastedDigits.substring( optDial.length );
+					// Notify select change to update country trigger button
+					var opt = options[ i ];
+					var picker = wrap.querySelector( '[data-cqfw-country-picker]' );
+					if ( picker && opt ) {
+						updateCountryTrigger( picker, opt.getAttribute( 'data-flag' ), opt.value, opt.getAttribute( 'data-name' ) );
+					}
+					break;
+				}
+			}
+		}
+
+		var national = digitsOnly( rawLocal ).replace( /^0+/, '' );
+
+		// If user entered/pasted the dial code again into local field, strip it once
+		if ( dialDigits && national.indexOf( dialDigits ) === 0 && national.length > dialDigits.length ) {
+			national = national.substring( dialDigits.length ).replace( /^0+/, '' );
+		}
+
 		local.value = national;
 		full.value = national ? ( dialDigits + national ) : '';
 	}
@@ -253,6 +299,189 @@
 			form.addEventListener( 'submit', function () {
 				form.querySelectorAll( '[data-cqfw-phone]' ).forEach( syncPhoneField );
 			} );
+		} );
+	}
+
+	function initCountryPickers() {
+		document.querySelectorAll( '[data-cqfw-country-picker]' ).forEach( function ( picker ) {
+			var trigger = picker.querySelector( '[data-cqfw-country-trigger]' );
+			var popover = picker.querySelector( '[data-cqfw-country-popover]' );
+			var searchInput = picker.querySelector( '[data-cqfw-country-search]' );
+			var optionsList = picker.querySelector( '[data-cqfw-country-options]' );
+			var emptyMsg = picker.querySelector( '[data-cqfw-country-empty]' );
+			var select = picker.querySelector( '[data-cqfw-phone-dial]' );
+			var phoneWrap = picker.closest( '[data-cqfw-phone]' );
+			var localInput = phoneWrap ? phoneWrap.querySelector( '[data-cqfw-phone-local]' ) : null;
+
+			if ( ! trigger || ! popover || ! searchInput || ! optionsList || ! select ) {
+				return;
+			}
+
+			function openPopover() {
+				// Close any other open popovers
+				document.querySelectorAll( '[data-cqfw-country-popover]' ).forEach( function ( other ) {
+					if ( other !== popover ) {
+						other.style.display = 'none';
+						var otherPicker = other.closest( '[data-cqfw-country-picker]' );
+						if ( otherPicker ) {
+							otherPicker.classList.remove( 'is-open' );
+							var otherBtn = otherPicker.querySelector( '[data-cqfw-country-trigger]' );
+							if ( otherBtn ) otherBtn.setAttribute( 'aria-expanded', 'false' );
+						}
+					}
+				} );
+
+				popover.style.display = 'block';
+				picker.classList.add( 'is-open' );
+				trigger.setAttribute( 'aria-expanded', 'true' );
+				searchInput.value = '';
+				filterOptions( '' );
+				setTimeout( function () {
+					searchInput.focus();
+					var selectedItem = optionsList.querySelector( '.cqfw-country-picker__option.is-selected' );
+					if ( selectedItem ) {
+						selectedItem.scrollIntoView( { block: 'nearest' } );
+					}
+				}, 60 );
+			}
+
+			function closePopover() {
+				popover.style.display = 'none';
+				picker.classList.remove( 'is-open' );
+				trigger.setAttribute( 'aria-expanded', 'false' );
+			}
+
+			function filterOptions( query ) {
+				var q = String( query || '' ).trim().toLowerCase().replace( /^\+/, '' );
+				var items = optionsList.querySelectorAll( '.cqfw-country-picker__option' );
+				var visibleCount = 0;
+
+				items.forEach( function ( item ) {
+					var name = ( item.getAttribute( 'data-name' ) || '' ).toLowerCase();
+					var dial = ( item.getAttribute( 'data-dial' ) || '' ).toLowerCase();
+					var iso = ( item.getAttribute( 'data-iso' ) || '' ).toLowerCase();
+
+					var matches = ! q || name.indexOf( q ) !== -1 || dial.indexOf( q ) !== -1 || iso.indexOf( q ) !== -1;
+					if ( matches ) {
+						item.style.display = '';
+						visibleCount++;
+					} else {
+						item.style.display = 'none';
+					}
+				} );
+
+				if ( emptyMsg ) {
+					emptyMsg.style.display = ( visibleCount === 0 ) ? 'block' : 'none';
+				}
+			}
+
+			function selectOption( item ) {
+				if ( ! item ) return;
+				var dialVal = item.getAttribute( 'data-dial' ) || '';
+				var isoVal = item.getAttribute( 'data-iso' ) || '';
+				var flagVal = item.getAttribute( 'data-flag' ) || '';
+				var nameVal = item.getAttribute( 'data-name' ) || '';
+
+				// Update native select
+				var optMatch = Array.prototype.find.call( select.options, function ( opt ) {
+					return opt.value === dialVal && ( ! isoVal || opt.getAttribute( 'data-iso' ) === isoVal );
+				} );
+				if ( optMatch ) {
+					select.selectedIndex = optMatch.index;
+				} else {
+					select.value = dialVal;
+				}
+
+				// Update active state in list
+				optionsList.querySelectorAll( '.cqfw-country-picker__option' ).forEach( function ( el ) {
+					el.classList.remove( 'is-selected' );
+					el.setAttribute( 'aria-selected', 'false' );
+				} );
+				item.classList.add( 'is-selected' );
+				item.setAttribute( 'aria-selected', 'true' );
+
+				// Update trigger button
+				updateCountryTrigger( picker, flagVal, dialVal, nameVal );
+
+				// Close dropdown
+				closePopover();
+
+				// Trigger change event on select to sync phone hidden full value
+				var evt = new Event( 'change', { bubbles: true } );
+				select.dispatchEvent( evt );
+
+				// Focus local input so user can type phone number right away
+				if ( localInput ) {
+					localInput.focus();
+				}
+			}
+
+			trigger.addEventListener( 'click', function ( e ) {
+				e.preventDefault();
+				e.stopPropagation();
+				if ( picker.classList.contains( 'is-open' ) ) {
+					closePopover();
+				} else {
+					openPopover();
+				}
+			} );
+
+			searchInput.addEventListener( 'input', function () {
+				filterOptions( searchInput.value );
+			} );
+
+			searchInput.addEventListener( 'keydown', function ( e ) {
+				if ( e.key === 'Escape' ) {
+					e.preventDefault();
+					closePopover();
+					trigger.focus();
+				} else if ( e.key === 'Enter' ) {
+					e.preventDefault();
+					var firstVisible = optionsList.querySelector( '.cqfw-country-picker__option:not([style*="display: none"])' );
+					if ( firstVisible ) {
+						selectOption( firstVisible );
+					}
+				}
+			} );
+
+			optionsList.addEventListener( 'click', function ( e ) {
+				var item = e.target.closest( '.cqfw-country-picker__option' );
+				if ( item ) {
+					selectOption( item );
+				}
+			} );
+
+			select.addEventListener( 'change', function () {
+				var opt = select.options[ select.selectedIndex ];
+				if ( opt ) {
+					var optDial = opt.value;
+					var optIso = opt.getAttribute( 'data-iso' ) || '';
+					var optFlag = opt.getAttribute( 'data-flag' ) || '';
+					var optName = opt.getAttribute( 'data-name' ) || '';
+
+					updateCountryTrigger( picker, optFlag, optDial, optName );
+
+					optionsList.querySelectorAll( '.cqfw-country-picker__option' ).forEach( function ( el ) {
+						var match = el.getAttribute( 'data-dial' ) === optDial && ( ! optIso || el.getAttribute( 'data-iso' ) === optIso );
+						el.classList.toggle( 'is-selected', match );
+						el.setAttribute( 'aria-selected', match ? 'true' : 'false' );
+					} );
+				}
+			} );
+		} );
+
+		document.addEventListener( 'click', function ( e ) {
+			if ( ! e.target.closest( '[data-cqfw-country-picker]' ) ) {
+				document.querySelectorAll( '[data-cqfw-country-popover]' ).forEach( function ( popover ) {
+					popover.style.display = 'none';
+					var p = popover.closest( '[data-cqfw-country-picker]' );
+					if ( p ) {
+						p.classList.remove( 'is-open' );
+						var btn = p.querySelector( '[data-cqfw-country-trigger]' );
+						if ( btn ) btn.setAttribute( 'aria-expanded', 'false' );
+					}
+				} );
+			}
 		} );
 	}
 
@@ -307,6 +536,7 @@
 		try { initLivePreview(); } catch ( e ) { console.error( 'CQFW live preview error:', e ); }
 		try { initStickySaveFeedback(); } catch ( e ) { console.error( 'CQFW save feedback error:', e ); }
 		try { initPhoneFields(); } catch ( e ) { console.error( 'CQFW phone fields error:', e ); }
+		try { initCountryPickers(); } catch ( e ) { console.error( 'CQFW country pickers error:', e ); }
 		try { initToasts(); } catch ( e ) { console.error( 'CQFW toast error:', e ); }
 		try { initChecklistProgress(); } catch ( e ) { console.error( 'CQFW checklist error:', e ); }
 	}
